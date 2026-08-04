@@ -1,0 +1,75 @@
+---
+const profiles = [
+  {
+    role: "La Palabra",
+    name: "Sofía Martínez",
+    bio: "Licenciada en Comunicación Social. Especialista en estrategia de comunicación organizacional, narrativas de marca y gestión del cambio. Más de diez años acompañando a líderes y equipos en procesos de transformación.",
+  },
+  {
+    role: "La Forma",
+    name: "Valentina Torres",
+    bio: "Diseñadora gráfica y directora de arte. Especialista en identidad visual, sistemas de marca y diseño editorial. Cree que la forma no es decoración: es argumento, es posición, es cultura.",
+  },
+];
+---
+
+<section
+  id="somos"
+  class="px-10 py-24"
+  style="background: linear-gradient(135deg, #C09882 0%, #A89090 50%, #8898A8 100%);"
+>
+  <div class="max-w-6xl mx-auto">
+    <!-- Heading -->
+    <div class="mb-20">
+      <p class="text-xs tracking-[0.3em] uppercase text-[#1E1816]/60 mb-3 font-light">
+        Quiénes somos
+      </p>
+      <h2
+        class="text-6xl xl:text-7xl font-light italic text-[#1E1816]"
+        style="font-family: var(--font-heading);"
+      >
+        Por qué somos dos
+      </h2>
+    </div>
+
+    <!-- Two profiles -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+      {
+        profiles.map((profile) => (
+          <div class="flex flex-col gap-6">
+            <!-- Photo placeholder (gray div) -->
+            <div class="w-48 h-48 rounded-full bg-[#7A7A7A]" />
+
+            <!-- Role label -->
+            <p class="text-xs tracking-[0.3em] uppercase text-[#1E1816]/60 font-light">
+              {profile.role}
+            </p>
+
+            <!-- Name -->
+            <h3
+              class="text-3xl font-light text-[#1E1816]"
+              style="font-family: var(--font-heading);"
+            >
+              {profile.name}
+            </h3>
+
+            <!-- Bio -->
+            <p class="text-sm leading-relaxed text-[#1E1816]/70 font-light max-w-sm">
+              {profile.bio}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Closing statement -->
+    <div class="mt-20 border-t border-[#1E1816]/20 pt-12 max-w-2xl">
+      <p
+        class="text-3xl font-light italic text-[#1E1816]"
+        style="font-family: var(--font-heading);"
+      >
+        Juntas, la estrategia y la estética dejan de ser opuestas. Se vuelven una sola cosa.
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+---
+const signals = [
+  {
+    number: "1",
+    text: "Querés cambiar la percepción de tu organización pero no sabés por dónde empezar.",
+  },
+  {
+    number: "2",
+    text: "Tu equipo interno y externo no comparte una visión común sobre quiénes son y a dónde van.",
+  },
+  {
+    number: "3",
+    text: "Sabés que algo no funciona en cómo se comunica tu marca, pero no podés identificar qué es.",
+  },
+];
+---
+
+<section
+  id="somos"
+  class="px-10 py-24"
+  style="background: linear-gradient(135deg, #4E4248 0%, #6E5E5A 50%, #887870 100%);"
+>
+  <div class="max-w-6xl mx-auto">
+    <!-- Heading -->
+    <h2
+      class="text-6xl xl:text-7xl font-light italic text-[#E2D9CF] mb-16"
+      style="font-family: var(--font-heading);"
+    >
+      ¿Te suena?
+    </h2>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+      {
+        signals.map((signal) => (
+          <div class="border border-[#A08878]/40 p-8 flex flex-col gap-6">
+            <span
+              class="text-5xl font-light text-[#C4A898]/60"
+              style="font-family: var(--font-heading);"
+            >
+              {signal.number}
+            </span>
+            <p class="text-sm leading-relaxed text-[#E2D9CF]/90 font-light">
+              {signal.text}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Footer text -->
+    <div class="border-t border-[#A08878]/30 pt-10">
+      <p
+        class="text-2xl font-light italic text-[#E2D9CF]"
+        style="font-family: var(--font-heading);"
+      >
+        Si reconociste alguna de estas señales,<br />
+        estás en el lugar indicado.
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,77 @@
+---
+const dimensions = [
+  {
+    label: "Comunicación",
+    description:
+      "Construimos mensajes que conectan con las personas desde adentro hacia afuera. Estrategia, contenidos y narrativas que dan coherencia a tu voz.",
+  },
+  {
+    label: "Comportamiento",
+    description:
+      "Alineamos equipos, liderazgos y culturas con la identidad que proyectan. El cambio real ocurre cuando las personas actúan en coherencia.",
+  },
+  {
+    label: "Cultura",
+    description:
+      "Articulamos los valores, creencias y formas de hacer propias de cada organización. La cultura no se declara, se construye.",
+  },
+];
+---
+
+<section
+  id="hacemos"
+  class="relative overflow-hidden px-10 py-24"
+  style="background-color: #7A8E96;"
+>
+  <!-- Large 3c watermark -->
+  <div
+    class="absolute right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none"
+    style="font-family: var(--font-heading);"
+    aria-hidden="true"
+  >
+    <span
+      class="text-[22rem] font-bold italic leading-none text-[#6A7E86]/30"
+    >
+      3c
+    </span>
+  </div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <!-- Section label -->
+    <p class="text-xs tracking-[0.3em] uppercase text-[#C8D4D8] mb-4 font-light">
+      Lo que
+    </p>
+    <h2
+      class="text-6xl xl:text-7xl font-light italic text-[#E8F0F4] mb-20"
+      style="font-family: var(--font-heading);"
+    >
+      Hacemos
+    </h2>
+
+    <!-- Three dimensions -->
+    <div class="flex flex-col gap-0 divide-y divide-[#6A7E86]/40 max-w-xl">
+      {
+        dimensions.map((dim) => (
+          <div class="py-8">
+            <h3 class="text-xs tracking-[0.35em] uppercase text-[#E8F0F4] font-light mb-3">
+              {dim.label}
+            </h3>
+            <p class="text-sm leading-relaxed text-[#C8D4D8]/80 font-light">
+              {dim.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Closing quote -->
+    <div class="mt-16 max-w-lg">
+      <p
+        class="text-2xl font-light italic text-[#E8F0F4]/80"
+        style="font-family: var(--font-heading);"
+      >
+        "Estrategia, identidad y cultura no son tres cosas. Son una."
+      </p>
+    </div>
+  </div>
+</section>

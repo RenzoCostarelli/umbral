@@ -1,4 +1,6 @@
 ---
+import LogoSvg from "./ui/LogoSvg.astro";
+
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Somos", href: "/#somos" },
@@ -8,24 +10,23 @@ const navItems = [
 ];
 ---
 
-<header class="w-full bg-[#DDD4C6] sticky top-0 z-50">
-  <nav class="flex items-center justify-between px-10 py-5">
-    <!-- Logo -->
-    <a href="/" class="flex flex-col gap-1">
-      <span
-        class="text-2xl font-bold tracking-[0.25em] text-[#1E1816] uppercase"
-        style="font-family: var(--font-heading);"
-      >
-        UMBRAL
-      </span>
-      <span
-        class="text-[0.65rem] tracking-widest text-[#5A4E46] uppercase font-light"
-      >
-        Consultora en comunicación, cultura y marca.
-      </span>
-    </a>
+<header class="w-full bg-radial bg-[#678894]/50 sticky top-0 z-50">
+  <div class="absolute w-full h-full inset-0 overflow-hidden">
+    <div
+      class="absolute w-[40%] h-auto aspect-square bg-[#ddb7a8]/30 -top-25 right-45 blur-3xl"
+    >
+    </div>
+  </div>
+  <nav
+    class="flex items-center justify-between px-10 py-3 container mx-auto relative"
+  >
+    <div class="flex items-center">
+      <a href="/" class="w-54 text-[#1E1816]">
+        <LogoSvg />
+      </a>
+      <p class="font-serif">Consultora en comunicación, cultura y marca</p>
+    </div>
 
-    <!-- Nav links -->
     <div class="items-center gap-8 hidden md:flex">
       {
         navItems.map((item) => (

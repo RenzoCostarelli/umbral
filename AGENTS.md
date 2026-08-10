@@ -26,3 +26,25 @@ Consult these guides before working on related tasks:
 - All components should go inside /components folder
 - All types/interfaces must be inside /types folder
 - Use pnpm never npm
+- imports for gsap and gsap plugins ar in lib/gsap.ts
+
+## GSAP conventions
+
+- Always import `gsap`, `ScrollTrigger`, and `SplitText` from `lib/gsap.ts` — never directly from the `gsap` package.
+- Define the timeline separately from the ScrollTrigger. The timeline must be `paused: true`.
+- Pass the timeline to `ScrollTrigger.create()` via the `animation` property.
+- Always use `scrub: true` in `ScrollTrigger.create()`.
+
+```ts
+const tl = gsap.timeline({ paused: true });
+
+tl.to(element, { ... });
+
+ScrollTrigger.create({
+  trigger: element,
+  start: "top 80%",
+  end: "bottom 20%",
+  animation: tl,
+  scrub: true,
+});
+```

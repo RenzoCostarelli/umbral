@@ -2,25 +2,25 @@
 const services = [
   {
     number: "01",
-    title: "Consultoría estratégica de comunicación",
+    title: "Estrategia y diagnóstico",
     description:
       "Diagnóstico, planificación y desarrollo de estrategias comunicacionales que alinean la voz de tu organización con sus objetivos.",
   },
   {
     number: "02",
-    title: "Diseño de identidad organizacional",
+    title: "Cultura y equipos",
     description:
       "Construcción y articulación de la identidad visual y verbal. Marca, naming, sistemas gráficos y manual de identidad.",
   },
   {
     number: "03",
-    title: "Comunicación interna y cultura",
+    title: "Marca e identidad",
     description:
       "Programas y herramientas para fortalecer la cultura interna, alinear equipos y consolidar el sentido de pertenencia.",
   },
   {
     number: "04",
-    title: "Formación y talleres",
+    title: "Contenidos y comunicacion in/out",
     description:
       "Espacios de aprendizaje para líderes y equipos: comunicación, marca personal, cultura organizacional y gestión del cambio.",
   },
@@ -29,35 +29,26 @@ const services = [
 
 <section
   id="servicios"
-  class="px-10 py-24"
-  style="background: linear-gradient(to right, #BF9278 0%, #A89898 50%, #8A9EB0 100%);"
+  class="px-10 py-24 bg-linear-to-br from-[#d4a589] to-[#abb9bf]"
 >
   <div class="max-w-6xl mx-auto">
-    <!-- Heading -->
+    <p class="tracking-[0.3rem] text-sm text-neutral-900 mb-4">SERVICIOS</p>
     <div class="mb-16 flex items-end justify-between">
-      <h2
-        class="text-6xl xl:text-7xl font-light italic text-[#1E1816]"
-        style="font-family: var(--font-heading);"
-      >
-        Cuatro líneas<br />de trabajo
+      <h2 class="text-4xl font-bold text-[#1E1816]">
+        Cuatro líneas de trabajo.
       </h2>
     </div>
 
-    <!-- Services grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-0 divide-x divide-[#1E1816]/20">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-0 divide-x divide-[#1E1816]/20"
+    >
       {
         services.map((service) => (
           <div class="px-8 first:pl-0 last:pr-0 flex flex-col gap-4 py-4">
-            <span
-              class="text-4xl font-light text-[#1E1816]/30"
-              style="font-family: var(--font-heading);"
-            >
+            <span class="text-4xl font-light font-serif text-neutral-50">
               {service.number}
             </span>
-            <h3
-              class="text-lg font-light text-[#1E1816] leading-snug"
-              style="font-family: var(--font-heading);"
-            >
+            <h3 class="text-xl font-medium text-neutral-50 leading-snug font-serif">
               {service.title}
             </h3>
             <p class="text-xs leading-relaxed text-[#1E1816]/70 font-light">
@@ -68,7 +59,6 @@ const services = [
       }
     </div>
 
-    <!-- CTA -->
     <div class="mt-16 flex justify-center">
       <a
         href="/#contacto"

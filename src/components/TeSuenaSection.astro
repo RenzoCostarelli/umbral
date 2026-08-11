@@ -2,15 +2,21 @@
 const signals = [
   {
     number: "1",
-    text: "Querés cambiar la percepción de tu organización pero no sabés por dónde empezar.",
+    tag: "Creciste.",
+    title: "¿Tu comunicación también?",
+    text: "Cada área terminó hablando su propio idioma.",
   },
   {
     number: "2",
-    text: "Tu equipo interno y externo no comparte una visión común sobre quiénes son y a dónde van.",
+    tag: "¿La cultura que declarás",
+    title: "es la que se vive?",
+    text: "Lo que se dice puertas afuera y lo que pasa puertas adentro no siempre coinciden.",
   },
   {
     number: "3",
-    text: "Sabés que algo no funciona en cómo se comunica tu marca, pero no podés identificar qué es.",
+    tag: "Buenos equipos,",
+    title: "conversaciones postergadas",
+    text: "Las decisiones clave pierden impulso cuando nadie las nombra.",
   },
 ];
 ---
@@ -21,7 +27,6 @@ const signals = [
   style="background: linear-gradient(135deg, #4E4248 0%, #6E5E5A 50%, #887870 100%);"
 >
   <div class="max-w-6xl mx-auto">
-    <!-- Heading -->
     <h2
       class="text-6xl xl:text-7xl font-light italic text-[#E2D9CF] mb-16"
       style="font-family: var(--font-heading);"
@@ -29,18 +34,21 @@ const signals = [
       ¿Te suena?
     </h2>
 
-    <!-- Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
       {
         signals.map((signal) => (
-          <div class="border border-[#A08878]/40 p-8 flex flex-col gap-6">
-            <span
-              class="text-5xl font-light text-[#C4A898]/60"
-              style="font-family: var(--font-heading);"
-            >
-              {signal.number}
-            </span>
-            <p class="text-sm leading-relaxed text-[#E2D9CF]/90 font-light">
+          <div class="border border-[#b3a19a] bg-[#b3a19a] pb-14 pt-8 px-8 flex flex-col gap-6 rounded-3xl">
+            <div class="text-5xl text-neutral-50 font-serif flex items-center gap-2">
+              <div class="text-6xl">{signal.number}</div>
+
+              <div class="h-2 w-2 rounded-full bg-white" />
+            </div>
+            <div class="font-serif">
+              <div class="text-3xl text-neutral-50">{signal.tag}</div>
+              <div class="text-3xl italic">{signal.title}</div>
+            </div>
+
+            <p class="eading-relaxed text-neutral-900 font-light">
               {signal.text}
             </p>
           </div>
@@ -48,14 +56,15 @@ const signals = [
       }
     </div>
 
-    <!-- Footer text -->
     <div class="border-t border-[#A08878]/30 pt-10">
+      <p class="text-xl md:text-3xl font-light font-serif">
+        Si reconociste alguna de estas señales, tu organización está frente a un
+        umbral.
+      </p>
       <p
-        class="text-2xl font-light italic text-[#E2D9CF]"
-        style="font-family: var(--font-heading);"
+        class="text-xl md:text-3xl italic text-neutral-50 font-light font-serif"
       >
-        Si reconociste alguna de estas señales,<br />
-        estás en el lugar indicado.
+        Nosotras ayudamos a cruzarlo.
       </p>
     </div>
   </div>

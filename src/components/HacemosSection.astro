@@ -1,19 +1,17 @@
 ---
-const dimensions = [
-  {
-    label: "Comunicación",
-    description: "Lo que conecta, orienta y da sentido colectivo.",
-  },
-  {
-    label: "Comportamiento",
-    description:
-      "Cómo se decide, se conversa y se construyen vínculos en el día a día.",
-  },
-  {
-    label: "Cultura",
-    description: "Lo que en la organización se vive, aunque no lo declare.",
-  },
-];
+import type { RichTextField } from "@prismicio/client";
+import type { HomepageHacemosItem } from "../types/homepage.ts";
+import PrismicRichText from "./PrismicRichText.astro";
+
+interface Props {
+  label: string;
+  title: string;
+  subtitle: string;
+  items: HomepageHacemosItem[];
+  endText: RichTextField;
+}
+
+const { label, title, subtitle, items, endText } = Astro.props;
 ---
 
 <section
@@ -34,38 +32,34 @@ const dimensions = [
 
   <div class="max-w-6xl mx-auto relative z-10">
     <div class="space-y-2">
-      <h2 class="text-2xl font-light font-sans text-neutral-900">Hacemos</h2>
-      <p class="text-neutral-900">
-        Comunicación estrategica 360° para organizaciones, instituciones y
-        empresas que entienden que el cambio real empieza en las personas.
-      </p>
-      <h3 class="text-4xl text-neutral-900">
-        Trabajamos las tres dimensiones que sostienen cualquier estrategia:
-      </h3>
+      <h2 class="text-2xl font-light font-sans text-neutral-900">{label}</h2>
+      <p class="text-neutral-900">{title}</p>
+      <h3 class="text-4xl text-neutral-900">{subtitle}</h3>
     </div>
     <div class="flex flex-col gap-0 divide-[#6A7E86]/40 max-w-xl pt-14">
       {
-        dimensions.map((dim) => (
-          <div class="mb-4 ">
+        items.map((item) => (
+          <div class="mb-4">
             <div class="flex items-center gap-2 mb-3">
               <div class="h-2 w-2 rounded-full bg-white" />
               <h3 class="text-4xl uppercase text-neutral-50 font-bold">
-                {dim.label}
+                {item.titulo}
               </h3>
             </div>
-            <p class="text-xl leading-relaxed text-neutral-900 font-light">
-              {dim.description}
-            </p>
+            <PrismicRichText
+              field={item.description}
+              class="[&_p]:text-xl [&_p]:leading-relaxed [&_p]:text-neutral-900 [&_p]:font-light"
+            />
           </div>
         ))
       }
     </div>
 
     <div class="mt-16">
-      <p class="text-3xl font-light text-neutral-50 font-serif">
-        Trabajar sólo una produce cambios cosméticos. Trabajarlas juntas produce
-        transformación real.
-      </p>
+      <PrismicRichText
+        field={endText}
+        class="[&_p]:text-3xl [&_p]:font-light [&_p]:text-neutral-50 [&_p]:font-serif [&_p+p]:mt-2 [&_em]:italic"
+      />
     </div>
   </div>
 </section>

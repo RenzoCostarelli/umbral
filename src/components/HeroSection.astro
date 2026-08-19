@@ -1,5 +1,14 @@
 ---
+import type { RichTextField, ImageField } from "@prismicio/client";
+import PrismicRichText from "./PrismicRichText.astro";
 
+interface Props {
+  title: string;
+  text: RichTextField;
+  backgroundImage: ImageField;
+}
+
+const { title, text, backgroundImage } = Astro.props;
 ---
 
 <section
@@ -7,11 +16,16 @@
 >
   <div class="absolute h-full w-full inset-0">
     <div class="absolute h-full w-full inset-0 bg-[#678894]/50"></div>
-    <img
-      src="https://res.cloudinary.com/dkgnaegp9/image/upload/v1786387673/bg_c4ydck.jpg"
-      aria-hidden="true"
-      class="w-full h-full object-cover object-center"
-    />
+    {
+      backgroundImage.url && (
+        <img
+          src={backgroundImage.url}
+          alt={backgroundImage.alt ?? ""}
+          aria-hidden="true"
+          class="w-full h-full object-cover object-center"
+        />
+      )
+    }
   </div>
 
   <div
@@ -21,21 +35,13 @@
       class="text-3xl xl:text-4xl leading-tight font-semibold text-[#1E1816]"
       style="font-family: var(--font-heading);"
     >
-      Toda transformación empieza con <em class="italic">el valor de cruzar.</em
-      >
+      {title}
     </h1>
 
-    <p
-      class="mt-8 text-xl text-center leading-relaxed text-[#4A3E36] font-light"
-    >
-      Acompañamos a organizaciones y equipos en sus momentos de cambio: cuando
-      lo conocido ya no alcanza y hace falta alinear comunicación, cultura y
-      marca para dar el próximo paso. Un umbral es el punto exacto donde termina
-      lo conocido y empieza lo posible.
-    </p>
-    <p class="font-medium text-xl italic">
-      Ahí, justo ahí, es donde trabajamos: no en el destino, sino en el paso.
-    </p>
+    <PrismicRichText
+      field={text}
+      class="mt-8 text-xl text-center leading-relaxed text-[#4A3E36] font-light [&_p+p]:mt-4"
+    />
 
     <a
       href="/#servicios"

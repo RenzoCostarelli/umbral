@@ -1,53 +1,14 @@
 ---
-import type { Servicio } from "../types/servicios";
+import type { HomepageServiciosLine } from "../types/homepage.ts";
+import PrismicRichText from "./PrismicRichText.astro";
 
-const services: Servicio[] = [
-  {
-    number: "01",
-    title: "Estrategia y diagnóstico",
-    description:
-      "Radiografía de la organización: la cultura declarada vs. la que se vive, roles claros y una hoja de ruta compartida.",
-    text: "todos saben hacia dónde van y qué se espera de cada uno.",
-  },
-  {
-    number: "02",
-    title: "Formaciones para organizaciones en evolución.",
-    description:
-      "Talleres de comunicación y liderazgo, integración de perfiles diversos, facilitación de conversaciones estratégicas y metodologías participativas.",
-    text: "Resultados: equipos que convierten las diferencias en valor y no en fricción.",
-    items: [
-      { label: "Comunicación Interna con Impacto" },
-      { label: "Liderazgos saludables y trabajo en equipo" },
-      { label: "Oratoria: Hablar para que te quieran escuchar" },
-      { label: "Cultura y comunicación: la mirada que construye identidad." },
-      { label: "Gestión de conversaciones difíciles" },
-      { label: "Cómo dar Feedback: Información vs. Sanción" },
-      { label: "Comunicación en Crisis:", description: "liderar en la incertidumbre." },
-      { label: "Humanos + IA:", description: "Automatizar tareas. Potenciar conversaciones. Conservar el criterio." },
-    ],
-  },
-  {
-    number: "03",
-    title: "Marca e identidad",
-    description: "Identidad institucional desde adentro hacia afuera.",
-    text: "una marca que se ve y se vive igual, adentro y afuera",
-    items: [
-      { label: "Estrategia & ADN:", description: "Propósito, valores y posicionamiento." },
-      { label: "Narrativa & Tono de Voz:", description: "Manifiesto y guía de redacción por canal." },
-      { label: "Sistema Visual:", description: "Logotipo, tipografías, color y dirección de arte." },
-      { label: "Branding Interno: (Culture & Onboarding)", description: "Estrategias y piezas para que el equipo viva la marca, desde kits de bienvenida hasta dinámicas de alineación interna." },
-      { label: "Aplicaciones:", description: "Gráfica editorial, señalética y soportes digitales o físicos." },
-      { label: "Manual de Marca:", description: "Ordenamiento y usos prácticos de la identidad de marca." },
-    ],
-  },
-  {
-    number: "04",
-    title: "Contenidos y comunicación in/out",
-    description:
-      "Estrategias de contenido a medida, partiendo de una pregunta clave: ¿qué queremos que las personas sientan, piensen o hagan después de recibir nuestro mensaje?",
-    text: "comunicación que mueve, no que solo informa.",
-  },
-];
+interface Props {
+  label: string;
+  title: string;
+  lines: HomepageServiciosLine[];
+}
+
+const { label, title, lines } = Astro.props;
 ---
 
 <section
@@ -55,32 +16,30 @@ const services: Servicio[] = [
   class="px-10 py-24 bg-linear-to-br from-[#d4a589] to-[#abb9bf]"
 >
   <div class="max-w-6xl mx-auto">
-    <p class="tracking-[0.3rem] text-sm text-neutral-900 mb-4">SERVICIOS</p>
+    <p class="tracking-[0.3rem] text-sm text-neutral-900 mb-4">{label}</p>
     <div class="mb-16 flex items-end justify-between">
-      <h2 class="text-4xl font-bold text-[#1E1816]">
-        Cuatro líneas de trabajo.
-      </h2>
+      <h2 class="text-4xl font-bold text-[#1E1816]">{title}</h2>
     </div>
 
     <div class="divide-y divide-[#1E1816]/20" id="servicios-accordion">
       {
-        services.map((service) => (
+        lines.map((line, index) => (
           <div class="accordion-item">
             <button
               class="accordion-trigger w-full flex items-start gap-6 py-6 text-left cursor-pointer"
               aria-expanded="false"
             >
               <span class="text-sm font-light text-[#1E1816]/50 pt-1 w-6 shrink-0">
-                {service.number}
+                {String(index + 1).padStart(2, "0")}
               </span>
               <div class="flex-1 min-w-0">
                 <div class="flex items-start justify-between gap-4">
                   <div>
                     <h3 class="text-xl font-medium text-[#1E1816] leading-snug font-serif">
-                      {service.title}
+                      {line.title}
                     </h3>
                     <p class="text-sm leading-relaxed text-[#1E1816]/60 font-light mt-1">
-                      {service.description}
+                      {line.description}
                     </p>
                   </div>
                   <span class="accordion-icon text-[#1E1816]/50 text-lg shrink-0 mt-0.5 select-none">
@@ -91,24 +50,10 @@ const services: Servicio[] = [
             </button>
             <div class="accordion-body overflow-hidden h-0">
               <div class="pl-12 pb-6">
-                <p class="text-sm leading-relaxed text-[#1E1816]/70 font-light italic">
-                  <span class="underline not-italic font-normal">Resultado:</span>{" "}{service.text}
-                </p>
-                {service.items && (
-                  <ul class="mt-3 space-y-1.5">
-                    {service.items.map((item) => (
-                      <li class="text-sm text-[#1E1816]/60 font-light flex items-start gap-2">
-                        <span class="mt-1.5 w-1 h-1 rounded-full bg-[#1E1816]/40 shrink-0" />
-                        <span>
-                          {item.description
-                            ? <><strong class="font-medium text-[#1E1816]/80">{item.label}</strong>{" "}{item.description}</>
-                            : item.label
-                          }
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <PrismicRichText
+                  field={line.text}
+                  class="[&_p]:text-sm [&_p]:leading-relaxed [&_p]:text-[#1E1816]/70 [&_p]:font-light [&_em]:italic [&_ul]:mt-3 [&_li]:text-sm [&_li]:text-[#1E1816]/60 [&_li]:font-light [&_li]:list-disc [&_li]:ml-4 [&_li+li]:mt-1.5 [&_strong]:font-medium [&_strong]:text-[#1E1816]/80"
+                />
               </div>
             </div>
           </div>

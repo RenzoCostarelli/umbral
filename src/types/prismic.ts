@@ -26,9 +26,18 @@ type HomapageDocumentDataLinesItem = {
   service_text: RichTextField;
 };
 
+type HomapageDocumentDataSomosProfile = {
+  profile_picture: ImageField;
+  profile_title: KeyTextField;
+  profile_name: KeyTextField;
+  profile_position: KeyTextField;
+  profile_phone: KeyTextField;
+  profile_text: RichTextField;
+};
+
 export type HomapageDocument = PrismicDocument<
   {
-    title: KeyTextField;
+    hero_title: RichTextField;
     text: RichTextField;
     background_image: ImageField;
     cta_text: KeyTextField;
@@ -45,6 +54,16 @@ export type HomapageDocument = PrismicDocument<
     services_title: KeyTextField;
     lines_items: GroupField<HomapageDocumentDataLinesItem>;
     service_cta_text: KeyTextField;
+    diferenciales_label: KeyTextField;
+    diferenciales_title: KeyTextField;
+    diferenciales_subtitle: KeyTextField;
+    in_text: RichTextField;
+    out_text: RichTextField;
+    somos_label: KeyTextField;
+    somos_title: KeyTextField;
+    somos_subtitle: KeyTextField;
+    profiles: GroupField<HomapageDocumentDataSomosProfile>;
+    end_tagline: RichTextField;
   },
   "homapage"
 >;

@@ -1,0 +1,31 @@
+---
+import type { RichTextField } from "@prismicio/client";
+import PrismicRichText from "./PrismicRichText.astro";
+
+interface Props {
+  type: "in" | "out";
+  text: string;
+  field: RichTextField;
+}
+
+const { type, text, field } = Astro.props;
+
+const isIn = type === "in";
+---
+
+<div
+  class:list={[
+    "absolute top-1/2 -translate-y-1/2 px-12 w-70 h-70 rounded-full border border-neutral-50/45 flex flex-col justify-center gap-2",
+    isIn ? "left-0" : "right-0",
+  ]}
+>
+  <div
+    class="w-full font-serif text-lg text-center uppercase text-neutral-90 font-semibold"
+  >
+    {text}
+  </div>
+  <PrismicRichText
+    field={field}
+    class="text-xs text-center text-[#1E1816]/70 leading-relaxed text-balance"
+  />
+</div>

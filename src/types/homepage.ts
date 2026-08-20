@@ -6,6 +6,7 @@ export interface HomepageHero {
   title: string;
   text: RichTextField;
   backgroundImage: ImageField;
+  ctaText: string;
 }
 
 export interface HomepageTeSuenaCard {
@@ -46,9 +47,36 @@ export interface HomepageServicios {
   lines: HomepageServiciosLine[];
 }
 
+export interface HomepageDiferenciales {
+  label: string;
+  title: string;
+  subtitle: string;
+  inText: RichTextField;
+  outText: RichTextField;
+}
+
+export interface HomepageSomosProfile {
+  photo: ImageField;
+  title: string;
+  name: string;
+  position: string;
+  phone: string;
+  text: RichTextField;
+}
+
+export interface HomepageSomos {
+  label: string;
+  title: string;
+  subtitle: string;
+  profiles: HomepageSomosProfile[];
+  closing: RichTextField;
+}
+
 export interface HomepageData {
   hero: HomepageHero;
   tesuena: HomepageTeSuena;
   hacemos: HomepageHacemos;
   servicios: HomepageServicios;
+  diferenciales: HomepageDiferenciales;
+  somos: HomepageSomos;
 }

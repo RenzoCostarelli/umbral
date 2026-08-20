@@ -32,9 +32,13 @@ const { label, title, subtitle, items, endText } = Astro.props;
 
   <div class="max-w-6xl mx-auto relative z-10">
     <div class="space-y-2">
-      <h2 class="text-2xl font-light font-sans text-neutral-900">{label}</h2>
+      <p
+        class="text-xs tracking-[0.3em] uppercase text-[#1E1816]/60 mb-3 font-light"
+      >
+        {label}
+      </p>
       <p class="text-neutral-900">{title}</p>
-      <h3 class="text-4xl text-neutral-900">{subtitle}</h3>
+      <h3 class="text-3xl text-neutral-900">{subtitle}</h3>
     </div>
     <div class="flex flex-col gap-0 divide-[#6A7E86]/40 max-w-xl pt-14">
       {
@@ -42,13 +46,13 @@ const { label, title, subtitle, items, endText } = Astro.props;
           <div class="mb-4">
             <div class="flex items-center gap-2 mb-3">
               <div class="h-2 w-2 rounded-full bg-white" />
-              <h3 class="text-4xl uppercase text-neutral-50 font-bold">
+              <h3 class="text-3xl uppercase text-neutral-100 font-bold">
                 {item.titulo}
               </h3>
             </div>
             <PrismicRichText
               field={item.description}
-              class="[&_p]:text-xl [&_p]:leading-relaxed [&_p]:text-neutral-900 [&_p]:font-light"
+              class="[&_p]:leading-relaxed [&_p]:text-neutral-90"
             />
           </div>
         ))

@@ -1,4 +1,5 @@
 import { createClient } from "./prismic.ts";
+import { asText } from "@prismicio/client";
 import type { HomapageDocument } from "../types/prismic.ts";
 import type { HomepageData } from "../types/homepage.ts";
 
@@ -9,9 +10,10 @@ export async function getHomepage(): Promise<HomepageData> {
 
   return {
     hero: {
-      title: data.title ?? "",
+      title: asText(data.hero_title) ?? "",
       text: data.text,
       backgroundImage: data.background_image,
+      ctaText: data.cta_text ?? "",
     },
     tesuena: {
       title: data.tesuena_title ?? "",
@@ -41,6 +43,27 @@ export async function getHomepage(): Promise<HomepageData> {
         description: line.service_description ?? "",
         text: line.service_text,
       })),
+    },
+    diferenciales: {
+      label: data.diferenciales_label ?? "",
+      title: data.diferenciales_title ?? "",
+      subtitle: data.diferenciales_subtitle ?? "",
+      inText: data.in_text,
+      outText: data.out_text,
+    },
+    somos: {
+      label: data.somos_label ?? "",
+      title: data.somos_title ?? "",
+      subtitle: data.somos_subtitle ?? "",
+      profiles: (data.profiles ?? []).map((p) => ({
+        photo: p.profile_picture,
+        title: p.profile_title ?? "",
+        name: p.profile_name ?? "",
+        position: p.profile_position ?? "",
+        phone: p.profile_phone ?? "",
+        text: p.profile_text,
+      })),
+      closing: data.end_tagline,
     },
   };
 }

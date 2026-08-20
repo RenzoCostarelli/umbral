@@ -21,6 +21,7 @@ const homepage = await getHomepage();
       title={homepage.hero.title}
       text={homepage.hero.text}
       backgroundImage={homepage.hero.backgroundImage}
+      ctaText={homepage.hero.ctaText}
     />
     <TeSuenaSection
       title={homepage.tesuena.title}
@@ -40,8 +41,20 @@ const homepage = await getHomepage();
       title={homepage.servicios.title}
       lines={homepage.servicios.lines}
     />
-    <!-- <DiferencialesSection />
-    <SomosSection /> -->
+    <DiferencialesSection
+      label={homepage.diferenciales.label}
+      title={homepage.diferenciales.title}
+      subtitle={homepage.diferenciales.subtitle}
+      inText={homepage.diferenciales.inText}
+      outText={homepage.diferenciales.outText}
+    />
+    <SomosSection
+      label={homepage.somos.label}
+      title={homepage.somos.title}
+      subtitle={homepage.somos.subtitle}
+      profiles={homepage.somos.profiles}
+      closing={homepage.somos.closing}
+    />
     <ContactoSection />
   </main>
   <Footer />

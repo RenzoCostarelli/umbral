@@ -1,89 +1,42 @@
 ---
+import type { HomepageDiferenciales } from "../types/homepage.ts";
+import SectionTitle from "./ui/SectionTitle.astro";
+import VennCircle from "./VennCircle.astro";
+import LogoSvg from "./ui/LogoSvg.astro";
+
+interface Props {
+  label: HomepageDiferenciales["label"];
+  title: HomepageDiferenciales["title"];
+  subtitle: HomepageDiferenciales["subtitle"];
+  inText: HomepageDiferenciales["inText"];
+  outText: HomepageDiferenciales["outText"];
+}
+
+const { label, title, subtitle, inText, outText } = Astro.props;
 ---
 
 <section
   id="diferenciales"
-  class="px-10 py-24"
-  style="background: linear-gradient(to right, #A89888 0%, #9898A0 50%, #8898B0 100%);"
+  class="px-10 py-24 pb-60 bg-linear-to-tl from-[#538393] to-[#ac8f82]"
 >
-  <div class="max-w-6xl mx-auto">
-    <!-- Heading -->
-    <h2
-      class="text-6xl xl:text-7xl font-light italic text-[#1E1816] mb-6"
-      style="font-family: var(--font-heading);"
-    >
-      Diferenciales
-    </h2>
-    <p class="text-sm text-[#1E1816]/70 max-w-sm mb-20 font-light leading-relaxed">
-      No separamos lo que la organización dice de lo que vive. Trabajamos desde adentro hacia afuera.
-    </p>
+  <div class="max-w-6xl mx-auto space-y-20">
+    <SectionTitle label={label} title={title} subtitle={subtitle} />
 
-    <!-- Venn diagram + text layout -->
-    <div class="flex flex-col xl:flex-row items-center gap-16 xl:gap-24">
-      <!-- Venn diagram -->
-      <div class="relative flex-shrink-0 w-[480px] h-[260px]">
-        <!-- Left circle -->
+    <div class="flex flex-col items-center gap-16 xl:gap-24 relative">
+      <div class="relative shrink-0 w-132 h-65 mx-auto">
+        <VennCircle type="in" text="In" field={inText} />
+        <VennCircle type="out" text="Out" field={outText} />
         <div
-          class="absolute left-0 top-1/2 -translate-y-1/2 w-[280px] h-[220px] rounded-full border-2 border-[#1E1816]/50 flex items-center justify-start pl-10"
-          style="background: rgba(30,24,22,0.06);"
+          class="absolute h-full w-full inset-0 top-[60%] flex items-center justify-center"
         >
-          <span class="text-xs tracking-[0.25em] uppercase text-[#1E1816]/70 font-light">
-            Adentro
-          </span>
-        </div>
-        <!-- Right circle -->
-        <div
-          class="absolute right-0 top-1/2 -translate-y-1/2 w-[280px] h-[220px] rounded-full border-2 border-[#1E1816]/50 flex items-center justify-end pr-10"
-          style="background: rgba(30,24,22,0.06);"
-        >
-          <span class="text-xs tracking-[0.25em] uppercase text-[#1E1816]/70 font-light">
-            Afuera
-          </span>
-        </div>
-        <!-- Center label (intersection) -->
-        <div class="absolute inset-0 flex items-center justify-center">
-          <span
-            class="text-2xl font-bold tracking-[0.2em] text-[#1E1816] uppercase"
-            style="font-family: var(--font-heading);"
-          >
-            UMBRAL
-          </span>
-        </div>
-      </div>
-
-      <!-- Differentials list -->
-      <div class="flex flex-col gap-8 flex-1">
-        {
-          [
-            {
-              title: "Coherencia total",
-              text: "Lo que decís, lo que sos y lo que mostrás deben ser una misma cosa. Acompañamos esa alineación.",
-            },
-            {
-              title: "Dos disciplinas, una mirada",
-              text: "La palabra y la forma son inseparables. Por eso trabajamos comunicación e identidad visual de manera integrada.",
-            },
-            {
-              title: "Proceso antes que producto",
-              text: "No entregamos piezas. Acompañamos procesos. La transformación real requiere tiempo, escucha y adaptación.",
-            },
-          ].map((diff) => (
-            <div class="flex gap-6">
-              <div class="w-px bg-[#1E1816]/30 shrink-0" />
-              <div>
-                <h3
-                  class="text-base font-light text-[#1E1816] mb-2"
-                  style="font-family: var(--font-heading);"
-                >
-                  {diff.title}
-                </h3>
-                <p class="text-xs text-[#1E1816]/70 leading-relaxed font-light">
-                  {diff.text}
-                </p>
-              </div>
+          <div class="flex flex-col items-center">
+            <div class="h-2 w-2 bg-neutral-800 rounded-full"></div>
+            <div class="w-0.5 h-50 bg-neutral-800"></div>
+            <div class="w-50">
+              <LogoSvg />
             </div>
-          ))
-        }
+          </div>
+        </div>
       </div>
     </div>
   </div>

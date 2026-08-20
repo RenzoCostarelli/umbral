@@ -1,6 +1,7 @@
 ---
 import type { HomepageServiciosLine } from "../types/homepage.ts";
 import PrismicRichText from "./PrismicRichText.astro";
+import SectionTitle from "./ui/SectionTitle.astro";
 
 interface Props {
   label: string;
@@ -13,14 +14,10 @@ const { label, title, lines } = Astro.props;
 
 <section
   id="servicios"
-  class="px-10 py-24 bg-linear-to-br from-[#d4a589] to-[#abb9bf]"
+  class="px-10 py-24 bg-linear-to-br from-[#526a82] to-[#9d8f82]"
 >
   <div class="max-w-6xl mx-auto">
-    <p class="tracking-[0.3rem] text-sm text-neutral-900 mb-4">{label}</p>
-    <div class="mb-16 flex items-end justify-between">
-      <h2 class="text-4xl font-bold text-[#1E1816]">{title}</h2>
-    </div>
-
+    <SectionTitle label={label} title={title} />
     <div class="divide-y divide-[#1E1816]/20" id="servicios-accordion">
       {
         lines.map((line, index) => (

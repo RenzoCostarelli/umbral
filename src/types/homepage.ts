@@ -3,7 +3,7 @@ import type { RichTextField, ImageField } from "@prismicio/client";
 export type { RichTextField, ImageField };
 
 export interface HomepageHero {
-  title: string;
+  title: RichTextField;
   text: RichTextField;
   backgroundImage: ImageField;
   ctaText: string;

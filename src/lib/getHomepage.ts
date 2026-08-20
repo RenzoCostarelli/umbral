@@ -10,7 +10,7 @@ export async function getHomepage(): Promise<HomepageData> {
 
   return {
     hero: {
-      title: asText(data.hero_title) ?? "",
+      title: data.title,
       text: data.text,
       backgroundImage: data.background_image,
       ctaText: data.cta_text ?? "",

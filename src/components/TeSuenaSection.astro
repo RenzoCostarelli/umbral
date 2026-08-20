@@ -2,6 +2,7 @@
 import type { RichTextField } from "@prismicio/client";
 import type { HomepageTeSuenaCard } from "../types/homepage.ts";
 import PrismicRichText from "./PrismicRichText.astro";
+import TresIcon from "./ui/icons/tresIcon.astro";
 
 interface Props {
   title: string;
@@ -15,23 +16,29 @@ const { title, cards, endPhrase1, endPhrase2 } = Astro.props;
 
 <section
   id="somos"
-  class="px-10 py-24"
-  style="background: linear-gradient(135deg, #4E4248 0%, #6E5E5A 50%, #887870 100%);"
+  class="px-10 py-24 bg-linear-to-r from-[#72737f] to-[#b6947b] relative overflow-hidden"
 >
+  <div class="absolute w-80 right-0 top-10 text-neutral-50 opacity-10">
+    <TresIcon />
+  </div>
+  <div
+    class="absolute -right-60 -bottom-60 bg-[#72737f]/80 w-120 h-120 rounded-full blur-3xl"
+  >
+  </div>
   <div class="max-w-6xl mx-auto">
     <h2
-      class="text-6xl xl:text-7xl font-light italic text-[#E2D9CF] mb-16"
+      class="text-3xl xl:text-4xl text-neutral-800 mb-10"
       style="font-family: var(--font-heading);"
     >
       {title}
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-8">
       {
         cards.map((card, index) => (
-          <div class="border border-[#b3a19a] bg-[#b3a19a] pb-14 pt-8 px-8 flex flex-col gap-6 rounded-3xl">
+          <div class=" bg-[#cdad9a] pb-5 pt-5 px-8 flex flex-col gap-6 rounded-3xl">
             <div class="text-5xl text-neutral-50 font-serif flex items-center gap-2">
-              <div class="text-6xl">{index + 1}</div>
+              <div class="text-4xl">{index + 1}</div>
               <div class="h-2 w-2 rounded-full bg-white" />
             </div>
             <div class="font-serif">

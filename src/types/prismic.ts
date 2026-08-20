@@ -7,7 +7,13 @@ import type {
   GroupField,
 } from "@prismicio/client";
 
-export type { PrismicDocument, RichTextField, ImageField, KeyTextField, LinkField };
+export type {
+  PrismicDocument,
+  RichTextField,
+  ImageField,
+  KeyTextField,
+  LinkField,
+};
 
 type HomapageDocumentDataCardsItem = {
   title_line_1: KeyTextField;
@@ -37,7 +43,7 @@ type HomapageDocumentDataSomosProfile = {
 
 export type HomapageDocument = PrismicDocument<
   {
-    hero_title: RichTextField;
+    title: RichTextField;
     text: RichTextField;
     background_image: ImageField;
     cta_text: KeyTextField;

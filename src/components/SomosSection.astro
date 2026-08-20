@@ -25,21 +25,28 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {
           profiles.map((profile) => (
-            <div class="flex flex-col gap-6 ">
-              <p class="text-xl  text-neutral-950 font-serif">
-                {profile.title}
-              </p>
+            <div class="flex flex-col gap-6 group">
+              <p class="text-xl text-neutral-950 font-serif">{profile.title}</p>
               <div class="flex">
                 {profile.photo?.url ? (
-                  <Image
-                    src={profile.photo.url}
-                    alt={profile.photo.alt ?? profile.name}
-                    width={192}
-                    height={192}
-                    class="w-32 h-32 rounded-full object-cover grayscale-100"
-                  />
+                  <div class="relative w-32 h-32 shrink-0 perspective-near">
+                    <div class="w-32 h-32 transform-3d transition-transform duration-700 group-hover:rotate-y-180 relative">
+                      <div class="absolute inset-0 backface-hidden rounded-full overflow-hidden">
+                        <Image
+                          src={profile.photo.url}
+                          alt={profile.photo.alt ?? profile.name}
+                          width={192}
+                          height={192}
+                          class="w-32 h-32 object-cover grayscale-100"
+                        />
+                      </div>
+                      <div class="absolute inset-0 backface-hidden rotate-y-180 rounded-full bg-amber-300 flex items-center justify-center">
+                        <span class="text-neutral-950 font-serif text-sm font-semibold tracking-wide">WSP</span>
+                      </div>
+                    </div>
+                  </div>
                 ) : (
-                  <div class="w-48 h-48 rounded-full bg-[#7A7A7A]" />
+                  <div class="w-32 h-32 rounded-full bg-[#7A7A7A] shrink-0" />
                 )}
                 <div class="ml-6 flex flex-col gap-1 font-serif">
                   <h3 class="text-xl text-neutral-950 font-semibold">

@@ -14,18 +14,28 @@ const isIn = type === "in";
 ---
 
 <div
+  data-venn-circle={type}
   class:list={[
-    "absolute top-1/2 -translate-y-1/2 px-12 w-70 h-70 rounded-full border border-neutral-50/45 flex flex-col justify-center gap-2",
+    "absolute top-1/2 -translate-y-1/2 px-[5%] md:px-[13%] w-[53%] aspect-square rounded-full border border-neutral-50/45 flex flex-col justify-center gap-2",
     isIn ? "left-0" : "right-0",
   ]}
 >
+  <!-- Label fuera del círculo solo en mobile -->
   <div
-    class="w-full font-serif text-lg text-center uppercase text-neutral-90 font-semibold"
+    class="sm:hidden absolute bottom-full left-0 right-0 text-center pb-2 font-serif text-xs uppercase text-neutral-90 font-semibold"
   >
     {text}
   </div>
+
+  <!-- Label dentro del círculo en sm+ -->
+  <div
+    class="hidden sm:block w-full font-serif text-lg text-center uppercase text-neutral-90 font-semibold"
+  >
+    {text}
+  </div>
+
   <PrismicRichText
     field={field}
-    class="text-xs text-center text-[#1E1816]/70 leading-relaxed text-balance"
+    class="text-[0.6rem] sm:text-xs text-center text-[#1E1816]/70 leading-relaxed text-balance"
   />
 </div>

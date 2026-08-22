@@ -17,22 +17,26 @@ const { label, title, subtitle, inText, outText } = Astro.props;
 
 <section
   id="diferenciales"
-  class="px-10 py-24 pb-60 bg-linear-to-tl from-[#538393] to-[#ac8f82]"
+  class="px-10 py-24 pb-60 bg-linear-to-tl from-[#538393] to-[#ac8f82] overflow-hidden"
 >
   <div class="max-w-6xl mx-auto space-y-20">
-    <SectionTitle label={label} title={title} subtitle={subtitle} />
+    <div id="diferenciales-header">
+      <SectionTitle label={label} title={title} subtitle={subtitle} />
+    </div>
 
     <div class="flex flex-col items-center gap-16 xl:gap-24 relative">
-      <div class="relative shrink-0 w-132 h-65 mx-auto">
+      <div class="relative w-full max-w-132 aspect-2/1 mx-auto">
         <VennCircle type="in" text="In" field={inText} />
         <VennCircle type="out" text="Out" field={outText} />
         <div
-          class="absolute h-full w-full inset-0 top-[60%] flex items-center justify-center"
+          data-venn-line
+          class="absolute h-full w-full inset-0 top-[90%] md:top-[60%] flex items-center justify-center"
         >
           <div class="flex flex-col items-center">
-            <div class="h-2 w-2 bg-neutral-800 rounded-full"></div>
-            <div class="w-0.5 h-50 bg-neutral-800"></div>
-            <div class="w-50">
+            <div data-venn-dot class="h-2 w-2 bg-neutral-800 rounded-full">
+            </div>
+            <div data-venn-bar class="w-0.5 h-35 md:h-50 bg-neutral-800"></div>
+            <div data-venn-logo class="w-50">
               <LogoSvg />
             </div>
           </div>
@@ -41,3 +45,79 @@ const { label, title, subtitle, inText, outText } = Astro.props;
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap, ScrollTrigger, SplitText } from "../lib/gsap";
+
+  // — Header: label + SplitText en h2 —
+  const headerEl = document.getElementById("diferenciales-header")!;
+  const paragraphs = Array.from(
+    headerEl.querySelectorAll("p"),
+  ) as HTMLElement[];
+  const labelEl = paragraphs[0];
+  const subtitleEl = paragraphs[1] ?? null;
+  const h2El = headerEl.querySelector("h2") as HTMLElement;
+
+  const split = new SplitText(h2El, { type: "words" });
+
+  const headerTl = gsap.timeline({ paused: true });
+  headerTl
+    .from(labelEl, { opacity: 0, filter: "blur(6px)", ease: "none" })
+    .from(
+      split.words,
+      { opacity: 0, filter: "blur(8px)", stagger: 0.1, ease: "none" },
+      "-=0.4",
+    );
+
+  if (subtitleEl) {
+    headerTl.from(
+      subtitleEl,
+      { opacity: 0, filter: "blur(6px)", ease: "none" },
+      "-=0.3",
+    );
+  }
+
+  ScrollTrigger.create({
+    trigger: headerEl,
+    start: "top 85%",
+    end: "top 40%",
+    animation: headerTl,
+    scrub: true,
+  });
+
+  // — Diagrama de Venn —
+  const circleIn = document.querySelector(
+    "[data-venn-circle='in']",
+  ) as HTMLElement;
+  const circleOut = document.querySelector(
+    "[data-venn-circle='out']",
+  ) as HTMLElement;
+  const dot = document.querySelector("[data-venn-dot]") as HTMLElement;
+  const bar = document.querySelector("[data-venn-bar]") as HTMLElement;
+  const logo = document.querySelector("[data-venn-logo]") as HTMLElement;
+
+  const vennTl = gsap.timeline({ paused: true });
+  vennTl
+    // Círculos entran desde los lados simultáneamente
+    .from(circleIn, { xPercent: -30, opacity: 0, ease: "none" })
+    .from(circleOut, { xPercent: 30, opacity: 0, ease: "none" }, "<")
+    // Punto aparece
+    .from(dot, {
+      opacity: 0,
+      scale: 0,
+      transformOrigin: "center",
+      ease: "none",
+    })
+    // Línea crece hacia abajo
+    .from(bar, { scaleY: 0, transformOrigin: "top center", ease: "none" })
+    // Logo aparece
+    .from(logo, { opacity: 0, y: 12, ease: "none" });
+
+  ScrollTrigger.create({
+    trigger: "#diferenciales",
+    start: "top 65%",
+    end: "bottom 75%",
+    animation: vennTl,
+    scrub: true,
+  });
+</script>

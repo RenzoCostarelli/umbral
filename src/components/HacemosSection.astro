@@ -21,16 +21,16 @@ const { label, title, subtitle, items, endText } = Astro.props;
   </div>
   <div class="max-w-6xl mx-auto relative z-10">
     <div class="space-y-2">
-      <p class="text-xs tracking-[0.3em] uppercase text-neutral-900 mb-3 fo">
+      <p id="hacemos-label" class="text-xs tracking-[0.3em] uppercase text-neutral-900 mb-3 fo">
         {label}
       </p>
-      <p class="text-neutral-900">{title}</p>
-      <h3 class="text-3xl text-neutral-900">{subtitle}</h3>
+      <p id="hacemos-title" class="text-neutral-900">{title}</p>
+      <h3 id="hacemos-subtitle" class="text-3xl text-neutral-900">{subtitle}</h3>
     </div>
-    <div class="flex flex-col gap-0 divide-[#6A7E86]/40 max-w-xl pt-14">
+    <div id="hacemos-items" class="flex flex-col gap-0 divide-[#6A7E86]/40 max-w-xl pt-14">
       {
         items.map((item) => (
-          <div class="mb-4">
+          <div class="hacemos-item mb-4">
             <div class="flex items-center gap-2 mb-3">
               <div class="h-2 w-2 rounded-full bg-white" />
               <h3 class="text-3xl uppercase text-neutral-100 font-bold">
@@ -46,7 +46,7 @@ const { label, title, subtitle, items, endText } = Astro.props;
       }
     </div>
 
-    <div class="mt-16">
+    <div id="hacemos-end" class="mt-16">
       <PrismicRichText
         field={endText}
         class="text-neutral-100 [&_p]:text-3xl [&_p]:font-light [&_p]:font-serif [&_p+p]:mt-2 [&_em]:italic"
@@ -54,3 +54,83 @@ const { label, title, subtitle, items, endText } = Astro.props;
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap, ScrollTrigger, SplitText } from "../lib/gsap";
+
+  const labelEl = document.getElementById("hacemos-label")!;
+  const titleEl = document.getElementById("hacemos-title")!;
+  const subtitleEl = document.getElementById("hacemos-subtitle")!;
+  const itemsEl = document.getElementById("hacemos-items")!;
+  const items = document.querySelectorAll(".hacemos-item");
+  const endEl = document.getElementById("hacemos-end")!;
+
+  // Label + título — blur simple
+  const headerTl = gsap.timeline({ paused: true });
+  headerTl.from([labelEl, titleEl], {
+    opacity: 0,
+    filter: "blur(6px)",
+    stagger: 0.2,
+    ease: "none",
+  });
+
+  ScrollTrigger.create({
+    trigger: labelEl,
+    start: "top 90%",
+    end: "top 55%",
+    animation: headerTl,
+    scrub: true,
+  });
+
+  // Subtítulo h3 — SplitText blur por palabras
+  const split = new SplitText(subtitleEl, { type: "words" });
+
+  const subtitleTl = gsap.timeline({ paused: true });
+  subtitleTl.from(split.words, {
+    opacity: 0,
+    filter: "blur(8px)",
+    stagger: 0.1,
+    ease: "none",
+  });
+
+  ScrollTrigger.create({
+    trigger: subtitleEl,
+    start: "top 85%",
+    end: "top 45%",
+    animation: subtitleTl,
+    scrub: true,
+  });
+
+  // Items — opacity + translateY con stagger
+  const itemsTl = gsap.timeline({ paused: true });
+  itemsTl.from(items, {
+    opacity: 0,
+    y: 60,
+    stagger: 0.2,
+    ease: "none",
+  });
+
+  ScrollTrigger.create({
+    trigger: itemsEl,
+    start: "top 85%",
+    end: "bottom 65%",
+    animation: itemsTl,
+    scrub: true,
+  });
+
+  // Texto final — blur fade
+  const endTl = gsap.timeline({ paused: true });
+  endTl.from(endEl, {
+    opacity: 0,
+    filter: "blur(6px)",
+    ease: "none",
+  });
+
+  ScrollTrigger.create({
+    trigger: endEl,
+    start: "top 90%",
+    end: "top 50%",
+    animation: endTl,
+    scrub: true,
+  });
+</script>

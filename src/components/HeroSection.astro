@@ -13,10 +13,10 @@ const { title, text, backgroundImage, ctaText } = Astro.props;
 ---
 
 <section
+  id="hero-section"
   class="min-h-[calc(100vh-72px)] flex items-center bg-[#7ea9c4] relative"
 >
   <div class="absolute h-full w-full inset-0">
-    <!-- <div class="absolute h-full w-full inset-0 bg-cyan-200/30"></div> -->
     {
       backgroundImage.url && (
         <img
@@ -30,21 +30,76 @@ const { title, text, backgroundImage, ctaText } = Astro.props;
   </div>
 
   <div
+    id="hero-content"
     class="w-full h-full max-w-5xl mx-auto flex flex-col gap-6 items-start justify-center px-14 py-20 relative"
   >
-    <PrismicRichText
-      field={title}
-      class="text-3xl xl:text-4xl font-serif text-[#1E1816]"
-    />
-    <PrismicRichText field={text} class="text-xl text-[#4A3E36]" />
+    <div id="hero-title">
+      <PrismicRichText
+        field={title}
+        class="text-2xl xl:text-4xl font-serif text-[#1E1816] text-balance"
+      />
+    </div>
+    <div id="hero-text">
+      <PrismicRichText
+        field={text}
+        class="md:text-xl text-[#4A3E36] text-balance"
+      />
+    </div>
 
-    <a
-      href="/#servicios"
-      style="box-shadow: rgba(255, 255, 255, 0.55) -1px -1px 0.5px 0px, rgba(255, 255, 255, 0.25) 1px 1px 0.5px 0px;"
-      class="mt-10 text-neutral-600 cursor-pointer overflow-hidden transition-all group px-4 py-2 group backdrop-blur-xs font-semibold rounded-full hover:scale-101 duration-500 group bg-linear-to-tl to-neutral-50/10 from-neutral-800/10 bg-transparent relative"
-    >
-      {ctaText}
-      <span class="text-base ml-2">→</span>
-    </a>
+    <div id="hero-cta" class="mt-10">
+      <a
+        href="/#servicios"
+        style="box-shadow: rgba(255, 255, 255, 0.55) -1px -1px 0.5px 0px, rgba(255, 255, 255, 0.25) 1px 1px 0.5px 0px;"
+        class="text-neutral-600 cursor-pointer overflow-hidden transition-all group px-4 py-2 group backdrop-blur-xs font-semibold rounded-full hover:scale-101 duration-500 group bg-linear-to-tl to-neutral-50/10 from-neutral-800/10 bg-transparent relative"
+      >
+        {ctaText}
+        <span class="text-base ml-2">→</span>
+      </a>
+    </div>
   </div>
 </section>
+
+<script>
+  import { gsap, ScrollTrigger, SplitText } from "../lib/gsap";
+
+  const section = document.getElementById("hero-section")!;
+  const content = document.getElementById("hero-content")!;
+  const titleEl = document.getElementById("hero-title")!;
+  const textEl = document.getElementById("hero-text")!;
+  const ctaEl = document.getElementById("hero-cta")!;
+
+  // Split title into words for entrance animation
+  const split = new SplitText(titleEl, { type: "words" });
+
+  // Set initial hidden state immediately (avoids CSS transition interference)
+  gsap.set([textEl, ctaEl], { opacity: 0, filter: "blur(3px)" });
+
+  // Entrance animation (plays on load)
+  const entranceTl = gsap.timeline({ delay: 0.1 });
+  entranceTl
+    .from(split.words, {
+      opacity: 0,
+      filter: "blur(6px)",
+      stagger: 0.07,
+      duration: 0.8,
+      ease: "power3.out",
+    })
+    .to(textEl, { opacity: 1, filter: "blur(0px)", duration: 0.7 }, "-=0.4")
+    .to(ctaEl, { opacity: 1, filter: "blur(0px)", duration: 0.6 }, "-=0.3");
+
+  // Scroll exit animation
+  const exitTl = gsap.timeline({ paused: true });
+  exitTl.to(content, {
+    y: -80,
+    opacity: 0,
+    ease: "none",
+  });
+
+  ScrollTrigger.create({
+    trigger: section,
+    start: "top top",
+    end: "bottom top",
+    animation: exitTl,
+    scrub: true,
+  });
+</script>

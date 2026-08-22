@@ -11,21 +11,22 @@
       <!-- Left: Contact info -->
       <div class="flex flex-col justify-between">
         <div>
-          <p class="text-xs tracking-[0.3em] uppercase text-[#E2D9CF]/60 mb-3 font-light">
+          <p id="contacto-label" class="text-xs tracking-[0.3em] uppercase text-[#E2D9CF]/60 mb-3 font-light">
             Escribinos
           </p>
           <h2
+            id="contacto-title"
             class="text-6xl xl:text-7xl font-light italic text-[#E2D9CF] mb-10"
             style="font-family: var(--font-heading);"
           >
             Hablemos
           </h2>
-          <p class="text-sm text-[#E2D9CF]/70 leading-relaxed max-w-xs font-light">
+          <p id="contacto-desc" class="text-sm text-[#E2D9CF]/70 leading-relaxed max-w-xs font-light">
             Si estás pensando en un proceso de transformación o querés entender mejor cómo trabajamos, nos encantaría escucharte.
           </p>
         </div>
 
-        <div class="flex flex-col gap-4 mt-12">
+        <div id="contacto-links" class="flex flex-col gap-4 mt-12">
           <a
             href="mailto:hola@umbral.com.ar"
             class="flex items-center gap-3 text-sm text-[#E2D9CF]/80 hover:text-[#E2D9CF] transition-colors font-light"
@@ -60,8 +61,8 @@
       </div>
 
       <!-- Right: Contact form -->
-      <form class="flex flex-col gap-5">
-        <div class="grid grid-cols-2 gap-5">
+      <form id="contacto-form" class="flex flex-col gap-5">
+        <div class="contacto-field grid grid-cols-2 gap-5">
           <div class="flex flex-col gap-2">
             <label class="text-xs tracking-widest uppercase text-[#E2D9CF]/60 font-light" for="nombre">
               Nombre
@@ -88,7 +89,7 @@
           </div>
         </div>
 
-        <div class="flex flex-col gap-2">
+        <div class="contacto-field flex flex-col gap-2">
           <label class="text-xs tracking-widest uppercase text-[#E2D9CF]/60 font-light" for="email">
             Email
           </label>
@@ -101,7 +102,7 @@
           />
         </div>
 
-        <div class="flex flex-col gap-2">
+        <div class="contacto-field flex flex-col gap-2">
           <label class="text-xs tracking-widest uppercase text-[#E2D9CF]/60 font-light" for="mensaje">
             Mensaje
           </label>
@@ -114,7 +115,7 @@
           ></textarea>
         </div>
 
-        <div class="flex justify-end mt-2">
+        <div id="contacto-submit" class="flex justify-end mt-2">
           <button
             type="submit"
             class="inline-flex items-center gap-3 border border-[#E2D9CF] text-[#E2D9CF] text-xs tracking-widest uppercase px-8 py-4 hover:bg-[#E2D9CF] hover:text-[#5A4E46] transition-colors"
@@ -127,3 +128,55 @@
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap, ScrollTrigger, SplitText } from "../lib/gsap";
+
+  const section = document.getElementById("contacto")!;
+  const labelEl = document.getElementById("contacto-label")!;
+  const titleEl = document.getElementById("contacto-title")!;
+  const descEl = document.getElementById("contacto-desc")!;
+  const linksEl = document.getElementById("contacto-links")!;
+  const formFields = document.querySelectorAll(".contacto-field");
+  const submitEl = document.getElementById("contacto-submit")!;
+
+  // — Columna izquierda: label + SplitText en h2 —
+  const split = new SplitText(titleEl, { type: "chars" });
+
+  const leftTl = gsap.timeline({ paused: true });
+  leftTl
+    .from(labelEl, { opacity: 0, filter: "blur(6px)", ease: "none" })
+    .from(
+      split.chars,
+      { opacity: 0, filter: "blur(8px)", stagger: 0.05, ease: "none" },
+      "-=0.3",
+    )
+    .from(descEl, { opacity: 0, filter: "blur(6px)", ease: "none" }, "-=0.2")
+    .from(
+      linksEl.children,
+      { opacity: 0, y: 16, stagger: 0.12, ease: "none" },
+      "-=0.2",
+    );
+
+  ScrollTrigger.create({
+    trigger: section,
+    start: "top 80%",
+    end: "center 55%",
+    animation: leftTl,
+    scrub: true,
+  });
+
+  // — Formulario: campos con stagger + botón —
+  const formTl = gsap.timeline({ paused: true });
+  formTl
+    .from(formFields, { opacity: 0, y: 30, stagger: 0.2, ease: "none" })
+    .from(submitEl, { opacity: 0, filter: "blur(4px)", ease: "none" }, "-=0.1");
+
+  ScrollTrigger.create({
+    trigger: document.getElementById("contacto-form")!,
+    start: "top 85%",
+    end: "bottom 70%",
+    animation: formTl,
+    scrub: true,
+  });
+</script>

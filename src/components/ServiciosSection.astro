@@ -17,8 +17,10 @@ const { label, title, lines } = Astro.props;
   class="px-10 py-24 bg-linear-to-br from-[#e1b7a8] to-[#e7cec1]"
 >
   <div class="max-w-6xl mx-auto">
-    <SectionTitle label={label} title={title} />
-    <div class="divide-y divide-[#1E1816]/20" id="servicios-accordion">
+    <div id="servicios-header">
+      <SectionTitle label={label} title={title} />
+    </div>
+    <div class="divide-y divide-[#1E1816]/20 mt-12" id="servicios-accordion">
       {
         lines.map((line, index) => (
           <div class="accordion-item">
@@ -69,7 +71,7 @@ const { label, title, lines } = Astro.props;
       }
     </div>
 
-    <div class="mt-16 flex justify-center">
+    <div id="servicios-cta" class="mt-16 flex justify-center">
       <a
         href="/#contacto"
         class="inline-flex items-center gap-3 border border-neutral-950 text-neutral-950 text-xs tracking-widest uppercase px-8 py-4 hover:bg-[#1E1816] hover:text-[#E2D9CF] transition-colors"
@@ -82,8 +84,9 @@ const { label, title, lines } = Astro.props;
 </section>
 
 <script>
-  import { gsap } from "../lib/gsap";
+  import { gsap, ScrollTrigger, SplitText } from "../lib/gsap";
 
+  // — Acordeón —
   document.querySelectorAll(".accordion-item").forEach((item) => {
     const trigger =
       item.querySelector<HTMLButtonElement>(".accordion-trigger")!;
@@ -110,5 +113,67 @@ const { label, title, lines } = Astro.props;
         gsap.to(icon, { rotation: 0, duration: 0.3, ease: "power2.inOut" });
       }
     });
+  });
+
+  // — Animaciones de entrada —
+
+  // Header: label blur → h2 SplitText blur
+  const headerEl = document.getElementById("servicios-header")!;
+  const labelEl = headerEl.querySelector("p")!;
+  const h2El = headerEl.querySelector("h2")!;
+
+  const split = new SplitText(h2El, { type: "words" });
+
+  const headerTl = gsap.timeline({ paused: true });
+  headerTl
+    .from(labelEl, { opacity: 0, filter: "blur(6px)", ease: "none" })
+    .from(
+      split.words,
+      { opacity: 0, filter: "blur(8px)", stagger: 0.1, ease: "none" },
+      "-=0.4",
+    );
+
+  ScrollTrigger.create({
+    trigger: headerEl,
+    start: "top 85%",
+    end: "top 40%",
+    animation: headerTl,
+    scrub: true,
+  });
+
+  // Items del acordeón — opacity + y stagger
+  const accordionItems = document.querySelectorAll(
+    "#servicios-accordion .accordion-item",
+  );
+  const accordionEl = document.getElementById("servicios-accordion")!;
+
+  const itemsTl = gsap.timeline({ paused: true });
+  itemsTl.from(accordionItems, {
+    opacity: 0,
+    y: 40,
+    stagger: 0.15,
+    ease: "none",
+  });
+
+  ScrollTrigger.create({
+    trigger: accordionEl,
+    start: "top 85%",
+    end: "bottom 75%",
+    animation: itemsTl,
+    scrub: true,
+  });
+
+  // CTA — blur fade
+  const ctaEl = document.getElementById("servicios-cta")!;
+
+  const ctaTl = gsap.timeline({ paused: true });
+  ctaTl.from(ctaEl, { opacity: 0, filter: "blur(6px)", ease: "none" });
+
+  ScrollTrigger.create({
+    trigger: ctaEl,
+    start: "top 90%",
+    end: "top 60%",
+    animation: ctaTl,
+    scrub: true,
   });
 </script>

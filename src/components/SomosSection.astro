@@ -20,12 +20,14 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
   class="px-10 py-24 bg-linear-to-r from-[#e7beac] to-[#c2d0d7]"
 >
   <div class="max-w-6xl mx-auto space-y-12">
-    <SectionTitle label={label} title={title} subtitle={subtitle} />
+    <div id="somos-header">
+      <SectionTitle label={label} title={title} subtitle={subtitle} />
+    </div>
     <div class="max-w-4xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {
           profiles.map((profile) => (
-            <div class="flex flex-col gap-6 group">
+            <div class="somos-profile flex flex-col gap-6 group">
               <p class="text-xl text-neutral-950 font-serif">{profile.title}</p>
               <div class="flex">
                 {profile.photo?.url ? (
@@ -81,7 +83,7 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
 
     {
       closing?.length > 0 && (
-        <div class="mt-20 pt-12 ">
+        <div id="somos-closing" class="mt-20 pt-12">
           <PrismicRichText
             field={closing}
             class="text-2xl font-light font-serif text-[#1E1816]"
@@ -91,3 +93,73 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
     }
   </div>
 </section>
+
+<script>
+  import { gsap, ScrollTrigger, SplitText } from "../lib/gsap";
+
+  // — Header —
+  const headerEl = document.getElementById("somos-header")!;
+  const paragraphs = Array.from(headerEl.querySelectorAll("p")) as HTMLElement[];
+  const labelEl = paragraphs[0];
+  const subtitleEl = paragraphs[1] ?? null;
+  const h2El = headerEl.querySelector("h2") as HTMLElement;
+
+  const split = new SplitText(h2El, { type: "words" });
+
+  const headerTl = gsap.timeline({ paused: true });
+  headerTl
+    .from(labelEl, { opacity: 0, filter: "blur(6px)", ease: "none" })
+    .from(
+      split.words,
+      { opacity: 0, filter: "blur(8px)", stagger: 0.1, ease: "none" },
+      "-=0.4",
+    );
+
+  if (subtitleEl) {
+    headerTl.from(subtitleEl, { opacity: 0, filter: "blur(6px)", ease: "none" }, "-=0.3");
+  }
+
+  ScrollTrigger.create({
+    trigger: headerEl,
+    start: "top 85%",
+    end: "top 40%",
+    animation: headerTl,
+    scrub: true,
+  });
+
+  // — Perfiles — opacity + y con stagger (el flip CSS queda intacto en el div hijo)
+  const profiles = document.querySelectorAll(".somos-profile");
+  const profilesGrid = profiles[0]?.parentElement;
+
+  const profilesTl = gsap.timeline({ paused: true });
+  profilesTl.from(profiles, {
+    opacity: 0,
+    y: 60,
+    stagger: 0.25,
+    ease: "none",
+  });
+
+  ScrollTrigger.create({
+    trigger: profilesGrid ?? "#somos",
+    start: "top 80%",
+    end: "bottom 65%",
+    animation: profilesTl,
+    scrub: true,
+  });
+
+  // — Closing —
+  const closingEl = document.getElementById("somos-closing");
+
+  if (closingEl) {
+    const closingTl = gsap.timeline({ paused: true });
+    closingTl.from(closingEl, { opacity: 0, filter: "blur(6px)", ease: "none" });
+
+    ScrollTrigger.create({
+      trigger: closingEl,
+      start: "top 90%",
+      end: "top 55%",
+      animation: closingTl,
+      scrub: true,
+    });
+  }
+</script>

@@ -1,7 +1,14 @@
 import Lenis from "lenis";
 
+let _lenis: Lenis | null = null;
+
+export function getLenis(): Lenis | null {
+  return _lenis;
+}
+
 export function initLenis() {
-  const lenis = new Lenis();
+  _lenis = new Lenis();
+  const lenis = _lenis;
 
   function raf(time: number) {
     lenis.raf(time);

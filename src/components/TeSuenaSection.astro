@@ -27,16 +27,17 @@ const { title, cards, endPhrase1, endPhrase2 } = Astro.props;
   </div>
   <div class="max-w-6xl mx-auto">
     <h2
+      id="te-suena-title"
       class="text-3xl xl:text-4xl text-neutral-800 mb-10"
       style="font-family: var(--font-heading);"
     >
       {title}
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-8">
+    <div id="te-suena-cards" class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-8">
       {
         cards.map((card, index) => (
-          <div class=" bg-[#cdad9a] pb-5 pt-5 px-8 flex flex-col gap-6 rounded-3xl">
+          <div class="te-suena-card bg-[#cdad9a] pb-5 pt-5 px-8 flex flex-col gap-6 rounded-3xl">
             <div class="text-5xl text-neutral-50 font-serif flex items-center gap-2">
               <div class="text-4xl">{index + 1}</div>
               <div class="h-2 w-2 rounded-full bg-white" />
@@ -74,3 +75,46 @@ const { title, cards, endPhrase1, endPhrase2 } = Astro.props;
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap, ScrollTrigger, SplitText } from "../lib/gsap";
+
+  const titleEl = document.getElementById("te-suena-title")!;
+  const cards = document.querySelectorAll(".te-suena-card");
+
+  // Title — blur animation on scroll
+  const split = new SplitText(titleEl, { type: "words" });
+
+  const titleTl = gsap.timeline({ paused: true });
+  titleTl.from(split.words, {
+    opacity: 0,
+    filter: "blur(8px)",
+    stagger: 0.1,
+    ease: "none",
+  });
+
+  ScrollTrigger.create({
+    trigger: titleEl,
+    start: "top 85%",
+    end: "top 45%",
+    animation: titleTl,
+    scrub: true,
+  });
+
+  // Cards — opacity + translateY con stagger en scroll
+  const cardsTl = gsap.timeline({ paused: true });
+  cardsTl.from(cards, {
+    opacity: 0,
+    y: 60,
+    stagger: 0.2,
+    ease: "none",
+  });
+
+  ScrollTrigger.create({
+    trigger: "#te-suena-cards",
+    start: "top 85%",
+    end: "bottom 65%",
+    animation: cardsTl,
+    scrub: true,
+  });
+</script>

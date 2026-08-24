@@ -48,13 +48,20 @@ const { title, text, backgroundImage, ctaText } = Astro.props;
 
     <div id="hero-cta" class="mt-10">
       <a
+        href="/#contacto"
+        class="inline-flex items-center gap-3 border border-neutral-950 text-neutral-950 text-xs tracking-widest uppercase px-8 py-4 hover:bg-[#1E1816] hover:text-[#E2D9CF] transition-colors rounded-full"
+      >
+        {ctaText}
+        <!-- <span class="text-base">→</span> -->
+      </a>
+      <!-- <a
         href="/#servicios"
         style="box-shadow: rgba(255, 255, 255, 0.55) -1px -1px 0.5px 0px, rgba(255, 255, 255, 0.25) 1px 1px 0.5px 0px;"
         class="text-neutral-600 cursor-pointer overflow-hidden transition-all group px-4 py-2 group backdrop-blur-xs font-semibold rounded-full hover:scale-101 duration-500 group bg-linear-to-tl to-neutral-50/10 from-neutral-800/10 bg-transparent relative"
       >
         {ctaText}
         <span class="text-base ml-2">→</span>
-      </a>
+      </a> -->
     </div>
   </div>
 </section>

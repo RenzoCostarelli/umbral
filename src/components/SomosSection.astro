@@ -29,7 +29,7 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
           profiles.map((profile) => (
             <div class="somos-profile flex flex-col gap-6 group">
               <p class="text-xl text-neutral-950 font-serif">{profile.title}</p>
-              <div class="flex">
+              <div class="flex items-center">
                 {profile.photo?.url ? (
                   <div class="relative w-32 h-32 shrink-0 perspective-near">
                     <div class="w-32 h-32 transform-3d transition-transform duration-700 group-hover:rotate-y-180 relative">
@@ -43,7 +43,9 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
                         />
                       </div>
                       <div class="absolute inset-0 backface-hidden rotate-y-180 rounded-full bg-amber-300 flex items-center justify-center">
-                        <span class="text-neutral-950 font-serif text-sm font-semibold tracking-wide">WSP</span>
+                        <span class="text-neutral-950 font-serif text-sm font-semibold tracking-wide">
+                          WSP
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -99,7 +101,9 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
 
   // — Header —
   const headerEl = document.getElementById("somos-header")!;
-  const paragraphs = Array.from(headerEl.querySelectorAll("p")) as HTMLElement[];
+  const paragraphs = Array.from(
+    headerEl.querySelectorAll("p"),
+  ) as HTMLElement[];
   const labelEl = paragraphs[0];
   const subtitleEl = paragraphs[1] ?? null;
   const h2El = headerEl.querySelector("h2") as HTMLElement;
@@ -116,7 +120,11 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
     );
 
   if (subtitleEl) {
-    headerTl.from(subtitleEl, { opacity: 0, filter: "blur(6px)", ease: "none" }, "-=0.3");
+    headerTl.from(
+      subtitleEl,
+      { opacity: 0, filter: "blur(6px)", ease: "none" },
+      "-=0.3",
+    );
   }
 
   ScrollTrigger.create({
@@ -152,7 +160,11 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
 
   if (closingEl) {
     const closingTl = gsap.timeline({ paused: true });
-    closingTl.from(closingEl, { opacity: 0, filter: "blur(6px)", ease: "none" });
+    closingTl.from(closingEl, {
+      opacity: 0,
+      filter: "blur(6px)",
+      ease: "none",
+    });
 
     ScrollTrigger.create({
       trigger: closingEl,

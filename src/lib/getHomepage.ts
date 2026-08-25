@@ -65,5 +65,14 @@ export async function getHomepage(): Promise<HomepageData> {
       })),
       closing: data.end_tagline,
     },
+    contacto: {
+      title: data.contact_title ?? "",
+      text: data.contact_text,
+      data: (data.contact_data ?? []).map((item) => ({
+        name: item.data_name ?? "",
+        position: item.data_position ?? "",
+        phone: item.data_phone ?? "",
+      })),
+    },
   };
 }

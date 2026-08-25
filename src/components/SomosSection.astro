@@ -3,6 +3,7 @@ import type { HomepageSomos } from "../types/homepage.ts";
 import { Image } from "astro:assets";
 import PrismicRichText from "./PrismicRichText.astro";
 import SectionTitle from "./ui/SectionTitle.astro";
+import WhatsAppIcon from "./ui/icons/WhatsAppIcon.astro";
 
 interface Props {
   label: HomepageSomos["label"];
@@ -42,11 +43,23 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
                           class="w-32 h-32 object-cover grayscale-100"
                         />
                       </div>
-                      <div class="absolute inset-0 backface-hidden rotate-y-180 rounded-full bg-amber-300 flex items-center justify-center">
-                        <span class="text-neutral-950 font-serif text-sm font-semibold tracking-wide">
-                          WSP
-                        </span>
-                      </div>
+                      {profile.phone ? (
+                        <a
+                          href={`https://wa.me/${profile.phone.replace(/\D/g, "")}?text=${encodeURIComponent("Hola, me gustaria recibir más información")}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Contactar por WhatsApp"
+                          class="absolute inset-0 backface-hidden rotate-y-180 rounded-full bg-linear-to-br from-neutral-50 to-green-300 flex items-center justify-center"
+                        >
+                          <WhatsAppIcon
+                            phone={profile.phone}
+                            iconOnly
+                            class="w-10 h-10 text-neutral-950"
+                          />
+                        </a>
+                      ) : (
+                        <div class="absolute inset-0 backface-hidden rotate-y-180 rounded-full bg-linear-to-br from-neutral-50 to-green-300 flex items-center justify-center" />
+                      )}
                     </div>
                   </div>
                 ) : (
@@ -73,6 +86,7 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
                   )}
                 </div>
               </div>
+
               <PrismicRichText
                 field={profile.text}
                 class="text-sm text-neutral-950 font-serif text-pretty md:pr-12"
@@ -81,18 +95,25 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
           ))
         }
       </div>
+      <div class="flex w-full" id="somos-cta-button">
+        <a
+          href="/manifiesto"
+          class="mt-15 mx-auto inline-flex items-center gap-3 border border-neutral-950 text-neutral-950 text-xs tracking-widest uppercase px-8 py-4 hover:bg-[#1E1816] hover:text-[#E2D9CF] transition-colors rounded-full"
+        >
+          Nuestro Manifiesto
+        </a>
+      </div>
+      {
+        closing?.length > 0 && (
+          <div id="somos-closing" class="mt-10 ">
+            <PrismicRichText
+              field={closing}
+              class="text-xl md:text-3xl font-light font-serif text-[#1E1816]"
+            />
+          </div>
+        )
+      }
     </div>
-
-    {
-      closing?.length > 0 && (
-        <div id="somos-closing" class="mt-20 pt-12">
-          <PrismicRichText
-            field={closing}
-            class="text-2xl font-light font-serif text-[#1E1816]"
-          />
-        </div>
-      )
-    }
   </div>
 </section>
 
@@ -155,6 +176,26 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
     scrub: true,
   });
 
+  // — CTA Button —
+  const ctaButtonEl = document.getElementById("somos-cta-button");
+
+  if (ctaButtonEl) {
+    const ctaTl = gsap.timeline({ paused: true });
+    ctaTl.from(ctaButtonEl, {
+      opacity: 0,
+      y: 30,
+      ease: "none",
+    });
+
+    ScrollTrigger.create({
+      trigger: ctaButtonEl,
+      start: "top 90%",
+      end: "top 70%",
+      animation: ctaTl,
+      scrub: true,
+    });
+  }
+
   // — Closing —
   const closingEl = document.getElementById("somos-closing");
 
@@ -169,7 +210,7 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
     ScrollTrigger.create({
       trigger: closingEl,
       start: "top 90%",
-      end: "top 55%",
+      end: "top 80%",
       animation: closingTl,
       scrub: true,
     });

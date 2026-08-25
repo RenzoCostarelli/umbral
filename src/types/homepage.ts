@@ -72,6 +72,18 @@ export interface HomepageSomos {
   closing: RichTextField;
 }
 
+export interface HomepageContactoDataItem {
+  name: string;
+  position: string;
+  phone: string;
+}
+
+export interface HomepageContacto {
+  title: string;
+  text: RichTextField;
+  data: HomepageContactoDataItem[];
+}
+
 export interface HomepageData {
   hero: HomepageHero;
   tesuena: HomepageTeSuena;
@@ -79,4 +91,5 @@ export interface HomepageData {
   servicios: HomepageServicios;
   diferenciales: HomepageDiferenciales;
   somos: HomepageSomos;
+  contacto: HomepageContacto;
 }

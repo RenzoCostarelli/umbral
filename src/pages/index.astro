@@ -55,7 +55,11 @@ const homepage = await getHomepage();
       profiles={homepage.somos.profiles}
       closing={homepage.somos.closing}
     />
-    <ContactoSection />
+    <ContactoSection
+      title={homepage.contacto.title}
+      text={homepage.contacto.text}
+      data={homepage.contacto.data}
+    />
   </main>
   <Footer />
 </Layout>

@@ -41,6 +41,12 @@ type HomapageDocumentDataSomosProfile = {
   profile_text: RichTextField;
 };
 
+type HomapageDocumentDataContactDataItem = {
+  data_name: KeyTextField;
+  data_position: KeyTextField;
+  data_phone: KeyTextField;
+};
+
 export type HomapageDocument = PrismicDocument<
   {
     title: RichTextField;
@@ -70,6 +76,16 @@ export type HomapageDocument = PrismicDocument<
     somos_subtitle: KeyTextField;
     profiles: GroupField<HomapageDocumentDataSomosProfile>;
     end_tagline: RichTextField;
+    contact_title: KeyTextField;
+    contact_text: RichTextField;
+    contact_data: GroupField<HomapageDocumentDataContactDataItem>;
   },
   "homapage"
+>;
+
+export type ManifiestoDocument = PrismicDocument<
+  {
+    text: RichTextField;
+  },
+  "manifiesto"
 >;

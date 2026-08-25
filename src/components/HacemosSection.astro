@@ -21,19 +21,27 @@ const { label, title, subtitle, items, endText } = Astro.props;
   </div>
   <div class="max-w-6xl mx-auto relative z-10">
     <div class="space-y-2">
-      <p id="hacemos-label" class="text-xs tracking-[0.3em] uppercase text-neutral-900 mb-3 fo">
+      <p
+        id="hacemos-label"
+        class="text-xs tracking-[0.3em] uppercase text-neutral-900 mb-5"
+      >
         {label}
       </p>
       <p id="hacemos-title" class="text-neutral-900">{title}</p>
-      <h3 id="hacemos-subtitle" class="text-3xl text-neutral-900">{subtitle}</h3>
+      <h3 id="hacemos-subtitle" class="text-3xl text-neutral-900 font-serif">
+        {subtitle}
+      </h3>
     </div>
-    <div id="hacemos-items" class="flex flex-col gap-0 divide-[#6A7E86]/40 max-w-xl pt-14">
+    <div
+      id="hacemos-items"
+      class="flex flex-col gap-0 divide-[#6A7E86]/40 max-w-xl pt-14"
+    >
       {
         items.map((item) => (
           <div class="hacemos-item mb-4">
             <div class="flex items-center gap-2 mb-3">
               <div class="h-2 w-2 rounded-full bg-white" />
-              <h3 class="text-3xl uppercase text-neutral-100 font-bold">
+              <h3 class="text-2xl uppercase font-serif text-neutral-100 font-bold">
                 {item.titulo}
               </h3>
             </div>

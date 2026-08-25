@@ -18,9 +18,11 @@ const homepage = await getHomepage();
   <Navbar />
   <main>
     <HeroSection
+      shortText={homepage.hero.shortText}
       title={homepage.hero.title}
       text={homepage.hero.text}
       backgroundImage={homepage.hero.backgroundImage}
+      bgVideo={homepage.hero.bgVideo}
       ctaText={homepage.hero.ctaText}
     />
     <TeSuenaSection

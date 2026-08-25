@@ -1,11 +1,13 @@
-import type { RichTextField, ImageField } from "@prismicio/client";
+import type { RichTextField, ImageField, LinkField } from "@prismicio/client";
 
 export type { RichTextField, ImageField };
 
 export interface HomepageHero {
+  shortText: RichTextField;
   title: RichTextField;
   text: RichTextField;
   backgroundImage: ImageField;
+  bgVideo: LinkField;
   ctaText: string;
 }
 

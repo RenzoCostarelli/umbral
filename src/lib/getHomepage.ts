@@ -10,9 +10,11 @@ export async function getHomepage(): Promise<HomepageData> {
 
   return {
     hero: {
+      shortText: data.short_text,
       title: data.title,
       text: data.text,
       backgroundImage: data.background_image,
+      bgVideo: data.bg_video,
       ctaText: data.cta_text ?? "",
     },
     tesuena: {

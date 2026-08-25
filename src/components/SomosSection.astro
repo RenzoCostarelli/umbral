@@ -98,9 +98,9 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
       <div class="flex w-full" id="somos-cta-button">
         <a
           href="/manifiesto"
-          class="mt-15 mx-auto inline-flex items-center gap-3 border border-neutral-950 text-neutral-950 text-xs tracking-widest uppercase px-8 py-4 hover:bg-[#1E1816] hover:text-[#E2D9CF] transition-colors rounded-full"
+          class="mt-15 mx-auto inline-flex items-center gap-3 border border-neutral-50 text-neutral-950 text-xs tracking-widest uppercase px-8 py-4 hover:bg-neutral-50 hover:text-neutral-950 transition-colors rounded-full"
         >
-          Nuestro Manifiesto
+          Manifiesto
         </a>
       </div>
       {
@@ -120,7 +120,6 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
 <script>
   import { gsap, ScrollTrigger, SplitText } from "../lib/gsap";
 
-  // — Header —
   const headerEl = document.getElementById("somos-header")!;
   const paragraphs = Array.from(
     headerEl.querySelectorAll("p"),

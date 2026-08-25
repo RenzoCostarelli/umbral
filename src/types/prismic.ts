@@ -49,9 +49,11 @@ type HomapageDocumentDataContactDataItem = {
 
 export type HomapageDocument = PrismicDocument<
   {
+    short_text: RichTextField;
     title: RichTextField;
     text: RichTextField;
     background_image: ImageField;
+    bg_video: LinkField;
     cta_text: KeyTextField;
     tesuena_title: KeyTextField;
     cards: GroupField<HomapageDocumentDataCardsItem>;

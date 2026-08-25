@@ -127,7 +127,7 @@ const { title, text, data } = Astro.props;
         <div id="contacto-submit" class="flex justify-end mt-2">
           <button
             type="submit"
-            class="inline-flex items-center gap-3 border border-neutral-800 text-neutral-900 text-xs tracking-widest uppercase px-8 py-4 hover:bg-neutral-800 hover:text-[#5A4E46] transition-colors"
+            class="inline-flex cursor-pointer items-center gap-3 border border-neutral-950 text-neutral-950 text-xs tracking-widest uppercase px-8 py-4 hover:bg-neutral-50 hover:border-neutral-50 hover:text-neutral-950 transition-colors rounded-full"
           >
             Enviar mensaje
             <span class="text-base">→</span>
@@ -172,7 +172,7 @@ const { title, text, data } = Astro.props;
   ScrollTrigger.create({
     trigger: section,
     start: "top 80%",
-    end: "center 55%",
+    end: "center 75%",
     animation: leftTl,
     scrub: true,
   });

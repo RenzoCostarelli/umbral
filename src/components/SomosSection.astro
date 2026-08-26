@@ -29,7 +29,9 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
         {
           profiles.map((profile) => (
             <div class="somos-profile flex flex-col gap-6 group">
-              <p class="text-xl text-neutral-950 font-serif">{profile.title}</p>
+              <p class="md:text-[1.3125rem] text-neutral-950 font-serif">
+                {profile.title}
+              </p>
               <div class="flex items-center">
                 {profile.photo?.url ? (
                   <div class="relative w-32 h-32 shrink-0 perspective-near">
@@ -108,7 +110,7 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
           <div id="somos-closing" class="mt-10 ">
             <PrismicRichText
               field={closing}
-              class="text-xl md:text-3xl font-light font-serif text-[#1E1816]"
+              class="md:text-[1.3125rem] font-light font-serif text-[#1E1816]"
             />
           </div>
         )

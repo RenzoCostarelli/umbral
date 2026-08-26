@@ -27,7 +27,9 @@ const { label, title, subtitle, items, endText } = Astro.props;
       >
         {label}
       </p>
-      <p id="hacemos-title" class="text-neutral-900">{title}</p>
+      <p id="hacemos-title" class="text-neutral-900 md:text-[1.3125rem]">
+        {title}
+      </p>
       <h3 id="hacemos-subtitle" class="text-3xl text-neutral-900 font-serif">
         {subtitle}
       </h3>
@@ -57,7 +59,7 @@ const { label, title, subtitle, items, endText } = Astro.props;
     <div id="hacemos-end" class="mt-16">
       <PrismicRichText
         field={endText}
-        class="text-neutral-100 [&_p]:text-3xl [&_p]:font-light [&_p]:font-serif [&_p+p]:mt-2 [&_em]:italic"
+        class="text-neutral-100 leading-none [&_p]:md:text-[1.3125rem] [&_p]:font-light [&_p]:font-serif [&_p+p]:mt-2 [&_em]:italic"
       />
     </div>
   </div>

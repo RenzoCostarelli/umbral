@@ -14,6 +14,9 @@ interface Props {
 }
 
 const { label, title, subtitle, profiles, closing } = Astro.props;
+
+const whatsappMessage =
+  "¡Hola! 👋 Gracias por contactarte con Umbral. Nos interesa conocerte y abrir una primera conversación. En breve nos ponemos en contacto con vos para empezar a pensar juntos.";
 ---
 
 <section
@@ -47,7 +50,7 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
                       </div>
                       {profile.phone ? (
                         <a
-                          href={`https://wa.me/${profile.phone.replace(/\D/g, "")}?text=${encodeURIComponent("Hola, me gustaria recibir más información")}`}
+                          href={`https://wa.me/${profile.phone.replace(/\D/g, "")}?text=${encodeURIComponent(whatsappMessage)}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="Contactar por WhatsApp"

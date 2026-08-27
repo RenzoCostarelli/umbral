@@ -51,7 +51,7 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="Contactar por WhatsApp"
-                          class="absolute inset-0 backface-hidden rotate-y-180 rounded-full bg-linear-to-br from-neutral-50 to-green-300 flex items-center justify-center"
+                          class="absolute inset-0 backface-hidden rotate-y-180 rounded-full bg-linear-to-br from-neutral-50 to-neutral-300 flex items-center justify-center"
                         >
                           <WhatsAppIcon
                             phone={profile.phone}
@@ -60,7 +60,7 @@ const { label, title, subtitle, profiles, closing } = Astro.props;
                           />
                         </a>
                       ) : (
-                        <div class="absolute inset-0 backface-hidden rotate-y-180 rounded-full bg-linear-to-br from-neutral-50 to-green-300 flex items-center justify-center" />
+                        <div class="absolute inset-0 backface-hidden rotate-y-180 rounded-full bg-linear-to-br from-neutral-50 to-neutral-300 flex items-center justify-center" />
                       )}
                     </div>
                   </div>

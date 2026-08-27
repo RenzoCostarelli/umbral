@@ -69,7 +69,7 @@ const { shortText, title, text, backgroundImage, bgVideo, ctaText } =
 
     <div id="hero-cta" class="mt-10">
       <a
-        href="/#contacto"
+        href="/#servicios"
         class="inline-flex items-center gap-3 border border-neutral-950 text-xs tracking-widest uppercase px-8 py-4 bg-[#1E1816] text-[#E2D9CF] hover:text-neutral-950 hover:bg-neutral-50 duration-400 hover:border-neutral-50 transition-colors rounded-full"
       >
         {ctaText}
@@ -80,6 +80,7 @@ const { shortText, title, text, backgroundImage, bgVideo, ctaText } =
 
 <script>
   import { gsap, ScrollTrigger, SplitText } from "../lib/gsap";
+  import { getLenis } from "../lib/lenis";
 
   const section = document.getElementById("hero-section")!;
   const content = document.getElementById("hero-content")!;
@@ -105,6 +106,19 @@ const { shortText, title, text, backgroundImage, bgVideo, ctaText } =
     })
     .to(textEl, { opacity: 1, filter: "blur(0px)", duration: 0.7 }, "-=0.4")
     .to(ctaEl, { opacity: 1, filter: "blur(0px)", duration: 0.6 }, "-=0.3");
+
+  // CTA smooth scroll
+  const ctaLink = ctaEl.querySelector("a");
+  ctaLink?.addEventListener("click", (e) => {
+    const href = ctaLink.getAttribute("href");
+    if (!href) return;
+    const hash = href.includes("#") ? href.split("#")[1] : null;
+    if (!hash) return;
+    const target = document.getElementById(hash);
+    if (!target) return;
+    e.preventDefault();
+    getLenis()?.scrollTo(target, { offset: -80 });
+  });
 
   // Scroll exit animation
   const exitTl = gsap.timeline({ paused: true });

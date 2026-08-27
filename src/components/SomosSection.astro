@@ -38,7 +38,7 @@ const whatsappMessage =
               <div class="flex items-center">
                 {profile.photo?.url ? (
                   <div class="relative w-32 h-32 shrink-0 perspective-near">
-                    <div class="w-32 h-32 transform-3d transition-transform duration-700 group-hover:rotate-y-180 relative">
+                    <div class="w-32 h-32 transform-3d transition-transform duration-700 hover:rotate-y-180 relative cursor-pointer">
                       <div class="absolute inset-0 backface-hidden rounded-full overflow-hidden">
                         <Image
                           src={profile.photo.url}
@@ -160,27 +160,26 @@ const whatsappMessage =
     scrub: true,
   });
 
-  // — Perfiles — opacity + y con stagger (el flip CSS queda intacto en el div hijo)
+  // — Perfiles — el primero entra desde la izquierda, el segundo desde la derecha
   const profiles = document.querySelectorAll(".somos-profile");
   const profilesGrid = profiles[0]?.parentElement;
 
   const profilesTl = gsap.timeline({ paused: true });
-  profilesTl.from(profiles, {
-    opacity: 0,
-    y: 60,
-    stagger: 0.25,
-    ease: "none",
-  });
+  if (profiles[0]) {
+    profilesTl.from(profiles[0], { opacity: 0, x: -80, ease: "none" }, 0);
+  }
+  if (profiles[1]) {
+    profilesTl.from(profiles[1], { opacity: 0, x: 80, ease: "none" }, 0);
+  }
 
   ScrollTrigger.create({
     trigger: profilesGrid ?? "#somos",
     start: "top 80%",
-    end: "bottom 65%",
+    end: "center 65%",
     animation: profilesTl,
     scrub: true,
   });
 
-  // — CTA Button —
   const ctaButtonEl = document.getElementById("somos-cta-button");
 
   if (ctaButtonEl) {

@@ -49,6 +49,20 @@ const { label, title, subtitle, inText, outText } = Astro.props;
 <script>
   import { gsap, ScrollTrigger, SplitText } from "../lib/gsap";
 
+  // Iguala la altura del contenido de ambos círculos para alinear títulos en desktop
+  function alignVennContentHeights() {
+    if (window.innerWidth < 640) return;
+    const contents = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-venn-content]"),
+    );
+    contents.forEach((el) => (el.style.height = ""));
+    const maxH = Math.max(...contents.map((el) => el.scrollHeight));
+    contents.forEach((el) => (el.style.height = `${maxH}px`));
+  }
+
+  document.fonts.ready.then(alignVennContentHeights);
+  window.addEventListener("resize", alignVennContentHeights);
+
   // — Header: label + SplitText en h2 —
   const headerEl = document.getElementById("diferenciales-header")!;
   const paragraphs = Array.from(

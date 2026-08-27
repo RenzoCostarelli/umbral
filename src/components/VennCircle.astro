@@ -16,7 +16,7 @@ const isIn = type === "in";
 <div
   data-venn-circle={type}
   class:list={[
-    "absolute top-1/2 -translate-y-1/2 px-[5%] md:px-[13%] w-[53%] aspect-square rounded-full border border-neutral-50/45 flex flex-col justify-center gap-2",
+    "absolute top-1/2 -translate-y-1/2 px-[5%] md:px-[13%] w-[53%] aspect-square rounded-full border border-neutral-50/45 flex flex-col justify-center",
     isIn ? "left-0" : "right-0",
   ]}
 >
@@ -27,15 +27,18 @@ const isIn = type === "in";
     {text}
   </div>
 
-  <!-- Label dentro del círculo en sm+ -->
-  <div
-    class="hidden sm:block w-full font-serif text-xs text-center uppercase text-neutral-90 font-semibold"
-  >
-    {text}
-  </div>
+  <!-- Wrapper cuya altura se iguala por JS para alinear títulos -->
+  <div data-venn-content class="flex flex-col gap-2">
+    <!-- Label dentro del círculo en sm+ -->
+    <div
+      class="hidden sm:block w-full font-serif text-xs text-center uppercase text-neutral-90 font-semibold"
+    >
+      {text}
+    </div>
 
-  <PrismicRichText
-    field={field}
-    class="text-[0.6rem] sm:text-xs text-center text-[#1E1816]/70 leading-relaxed text-balance"
-  />
+    <PrismicRichText
+      field={field}
+      class="text-[0.6rem] sm:text-xs text-center text-[#1E1816]/70 leading-relaxed text-balance"
+    />
+  </div>
 </div>

@@ -18,7 +18,7 @@ const { title, cards, endPhrase1, endPhrase2 } = Astro.props;
   id="te-suena"
   class="px-10 py-24 bg-linear-to-r from-[#72737f] to-[#b6947b] relative overflow-hidden"
 >
-  <div class="absolute w-80 right-0 top-10 text-neutral-50 opacity-10">
+  <div class="absolute w-80 right-0 top-10 text-neutral-50 opacity-10 z-9999">
     <TresIcon />
   </div>
   <div
@@ -50,14 +50,14 @@ const { title, cards, endPhrase1, endPhrase2 } = Astro.props;
             </div>
             <PrismicRichText
               field={card.text}
-              class="leading-relaxed text-neutral-900 font-light"
+              class="leading-normal text-neutral-900"
             />
           </div>
         ))
       }
     </div>
 
-    <div class="border-t border-[#A08878]/30 pt-10">
+    <div class="pt-10">
       {
         endPhrase1.length > 0 && (
           <PrismicRichText

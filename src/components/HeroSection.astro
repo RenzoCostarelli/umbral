@@ -47,23 +47,23 @@ const { shortText, title, text, backgroundImage, bgVideo, ctaText } =
 
   <div
     id="hero-content"
-    class="w-full h-full max-w-5xl mx-auto flex flex-col gap-3 items-start justify-center px-14 py-20 relative"
+    class="w-full h-full max-w-5xl mx-auto flex flex-col gap-3 items-start justify-center px-6 md:px-14 py-10 md:py-20 relative"
   >
     <PrismicRichText
       field={shortText}
-      class="md:text-[1.125rem] font-serif text-[#1E1816] text-balance"
+      class="md:text-[1.125rem] font-serif text-[#1E1816] text-pretty"
     />
 
     <div id="hero-title">
       <PrismicRichText
         field={title}
-        class="md:text-[2rem] font-serif text-[#1E1816] text-balance"
+        class="text-[2rem] font-serif text-[#1E1816] text-balance"
       />
     </div>
     <div id="hero-text">
       <PrismicRichText
         field={text}
-        class="text-sm md:text-[1rem] text-neutral-950 text-balance"
+        class="md:text-[1rem] text-neutral-950 text-balance"
       />
     </div>
 

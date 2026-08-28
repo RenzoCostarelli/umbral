@@ -21,7 +21,7 @@ const whatsappMessage =
 
 <section
   id="somos"
-  class="px-10 py-24 bg-linear-to-r from-[#e7beac] to-[#c2d0d7]"
+  class="px-10 py-24 bg-linear-to-r from-[#e7beac] to-[#c2d0d7] overflow-x-hidden"
 >
   <div class="max-w-6xl mx-auto space-y-12">
     <div id="somos-header">
@@ -32,12 +32,12 @@ const whatsappMessage =
         {
           profiles.map((profile) => (
             <div class="somos-profile flex flex-col gap-6 group">
-              <p class="md:text-[1.3125rem] text-neutral-950 font-serif">
+              <p class="text-[1.3125rem] text-neutral-950 font-serif">
                 {profile.title}
               </p>
               <div class="flex items-center">
                 {profile.photo?.url ? (
-                  <div class="relative w-32 h-32 shrink-0 perspective-near">
+                  <div class="relative  w-32 h-32 shrink-0 perspective-near">
                     <div class="w-32 h-32 transform-3d transition-transform duration-700 hover:rotate-y-180 relative cursor-pointer">
                       <div class="absolute inset-0 backface-hidden rounded-full overflow-hidden">
                         <Image
@@ -70,8 +70,8 @@ const whatsappMessage =
                 ) : (
                   <div class="w-32 h-32 rounded-full bg-[#7A7A7A] shrink-0" />
                 )}
-                <div class="ml-6 flex flex-col gap-1 font-serif">
-                  <h3 class="text-xl text-neutral-950 font-semibold">
+                <div class="ml-3 md:ml-6 flex flex-col gap-1 font-serif">
+                  <h3 class="text-[0.9rem] md:text-xl text-neutral-950 font-semibold">
                     {profile.name}
                   </h3>
 
@@ -86,7 +86,8 @@ const whatsappMessage =
                       rel="noopener noreferrer"
                       class="text-xs  text-neutral-950 font-light hover:text-[#1E1816] transition-colors"
                     >
-                      WhatsApp {profile.phone}
+                      <span class="hidden md:block">WhatsApp</span>
+                      {profile.phone}
                     </a>
                   )}
                 </div>

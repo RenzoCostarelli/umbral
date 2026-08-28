@@ -2,7 +2,7 @@
 import type { RichTextField } from "@prismicio/client";
 import type { HomepageTeSuenaCard } from "../types/homepage.ts";
 import PrismicRichText from "./PrismicRichText.astro";
-import TresIcon from "./ui/icons/tresIcon.astro";
+import AmpIcon from "./ui/icons/ampIcon.astro";
 
 interface Props {
   title: string;
@@ -19,7 +19,7 @@ const { title, cards, endPhrase1, endPhrase2 } = Astro.props;
   class="px-10 py-24 bg-linear-to-r from-[#72737f] to-[#b6947b] relative overflow-hidden"
 >
   <div class="absolute w-80 right-0 top-10 text-neutral-50 opacity-10 z-9999">
-    <TresIcon />
+    <AmpIcon />
   </div>
   <div
     class="absolute -right-60 -bottom-60 bg-[#72737f]/80 w-120 h-120 rounded-full blur-3xl"
@@ -28,14 +28,14 @@ const { title, cards, endPhrase1, endPhrase2 } = Astro.props;
   <div class="max-w-6xl mx-auto">
     <h2
       id="te-suena-title"
-      class="md:text-[1.75rem] text-neutral-800 mb-10 font-serif"
+      class="text-2xl md:text-[1.75rem] text-neutral-800 mb-10 font-serif"
     >
       {title}
     </h2>
 
     <div
       id="te-suena-cards"
-      class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-8"
+      class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 mb-8"
     >
       {
         cards.map((card, index) => (
@@ -57,7 +57,7 @@ const { title, cards, endPhrase1, endPhrase2 } = Astro.props;
       }
     </div>
 
-    <div class="pt-10">
+    <div class="pt-10 relative">
       {
         endPhrase1.length > 0 && (
           <PrismicRichText

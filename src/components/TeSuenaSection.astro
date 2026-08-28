@@ -28,7 +28,7 @@ const { title, cards, endPhrase1, endPhrase2 } = Astro.props;
   <div class="max-w-6xl mx-auto">
     <h2
       id="te-suena-title"
-      class="md:text-[1.3125rem] text-neutral-800 mb-10 font-serif"
+      class="md:text-[1.75rem] text-neutral-800 mb-10 font-serif"
     >
       {title}
     </h2>
@@ -62,7 +62,7 @@ const { title, cards, endPhrase1, endPhrase2 } = Astro.props;
         endPhrase1.length > 0 && (
           <PrismicRichText
             field={endPhrase1}
-            class="[&_p]:text-[1rem] [&_p]:md:md:text-[1.3125rem] [&_p]:font-light [&_p]:font-serif"
+            class="[&_p]:text-[1rem] [&_p]:md:md:text-2xl [&_p]:font-light [&_p]:font-serif"
           />
         )
       }
@@ -70,7 +70,7 @@ const { title, cards, endPhrase1, endPhrase2 } = Astro.props;
         endPhrase2.length > 0 && (
           <PrismicRichText
             field={endPhrase2}
-            class="[&_p]:text-[1rem] [&_p]:md:text-[1.3125rem] [&_p]:italic [&_p]:text-neutral-50 [&_p]:font-light [&_p]:font-serif"
+            class="[&_p]:text-[1rem] [&_p]:md:text-2xl [&_p]:italic [&_p]:text-neutral-50 [&_p]:font-light [&_p]:font-serif"
           />
         )
       }

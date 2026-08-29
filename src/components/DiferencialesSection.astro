@@ -30,15 +30,13 @@ const { label, title, subtitle, inText, outText } = Astro.props;
         <VennCircle type="out" text="Out" field={outText} />
         <div
           data-venn-line
-          class="absolute h-full w-full inset-0 top-[90%] md:top-[60%] flex items-center justify-center"
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 flex flex-col items-center"
         >
-          <div class="flex flex-col items-center">
-            <div data-venn-dot class="h-2 w-2 bg-neutral-800 rounded-full">
-            </div>
-            <div data-venn-bar class="w-0.5 h-35 md:h-50 bg-neutral-800"></div>
-            <div data-venn-logo class="w-50">
-              <LogoSvg />
-            </div>
+          <div data-venn-dot class="h-2 w-2 bg-neutral-800 rounded-full">
+          </div>
+          <div data-venn-bar class="w-0.5 h-35 md:h-50 bg-neutral-800"></div>
+          <div data-venn-logo class="w-50">
+            <LogoSvg />
           </div>
         </div>
       </div>
@@ -48,6 +46,28 @@ const { label, title, subtitle, inText, outText } = Astro.props;
 
 <script>
   import { gsap, ScrollTrigger, SplitText } from "../lib/gsap";
+
+  // Posiciona data-venn-line en el centro exacto de la intersección de los círculos
+  function positionVennLine() {
+    const circleIn = document.querySelector<HTMLElement>(
+      "[data-venn-circle='in']",
+    );
+    const vennLine = document.querySelector<HTMLElement>("[data-venn-line]");
+    if (!circleIn || !vennLine) return;
+
+    const wrapper = vennLine.parentElement!;
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const circleRect = circleIn.getBoundingClientRect();
+
+    // El centro de la intersección siempre está en el centro vertical del círculo
+    // y en el centro horizontal del contenedor
+    const centerY = circleRect.top + circleRect.height / 2 - wrapperRect.top;
+
+    vennLine.style.top = `${centerY}px`;
+  }
+
+  document.fonts.ready.then(positionVennLine);
+  window.addEventListener("resize", positionVennLine);
 
   // Iguala la altura del contenido de ambos círculos para alinear títulos en desktop
   function alignVennContentHeights() {

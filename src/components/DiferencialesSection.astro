@@ -32,8 +32,7 @@ const { label, title, subtitle, inText, outText } = Astro.props;
           data-venn-line
           class="absolute top-1/2 left-1/2 -translate-x-1/2 flex flex-col items-center"
         >
-          <div data-venn-dot class="h-2 w-2 bg-neutral-800 rounded-full">
-          </div>
+          <div data-venn-dot class="h-2 w-2 bg-neutral-800 rounded-full"></div>
           <div data-venn-bar class="w-0.5 h-35 md:h-50 bg-neutral-800"></div>
           <div data-venn-logo class="w-50">
             <LogoSvg />
@@ -71,7 +70,7 @@ const { label, title, subtitle, inText, outText } = Astro.props;
 
   // Iguala la altura del contenido de ambos círculos para alinear títulos en desktop
   function alignVennContentHeights() {
-    if (window.innerWidth < 640) return;
+    // if (window.innerWidth < 640) return;
     const contents = Array.from(
       document.querySelectorAll<HTMLElement>("[data-venn-content]"),
     );

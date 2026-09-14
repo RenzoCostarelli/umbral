@@ -1,6 +1,7 @@
 ---
 import type { HomepageContacto } from "../types/homepage.ts";
 import PrismicRichText from "./PrismicRichText.astro";
+import ContactoForm from "./ContactoForm.astro";
 
 interface Props {
   title: HomepageContacto["title"];
@@ -59,81 +60,7 @@ const { title, text, data } = Astro.props;
         }
       </div>
 
-      <form id="contacto-form" class="flex flex-col gap-5">
-        <div class="contacto-field grid grid-cols-2 gap-5">
-          <div class="flex flex-col gap-2">
-            <label
-              class="text-xs tracking-widest uppercase text-neutral-900/60"
-              for="nombre"
-            >
-              Nombre
-            </label>
-            <input
-              id="nombre"
-              name="nombre"
-              type="text"
-              class="bg-transparent border-b border-neutral-50 py-2 text-sm text-neutral-900 placeholder-neutral-800 focus:outline-none focus:border-neutral-50/70 transition-colors font-light"
-              placeholder="Tu nombre"
-            />
-          </div>
-          <div class="flex flex-col gap-2">
-            <label
-              class="text-xs tracking-widest uppercase text-neutral-900/60"
-              for="apellido"
-            >
-              Apellido
-            </label>
-            <input
-              id="apellido"
-              name="apellido"
-              type="text"
-              class="bg-transparent border-b border-neutral-50 py-2 text-sm text-neutral-900 placeholder-neutral-800 focus:outline-none focus:border-neutral-50/70 transition-colors font-light"
-              placeholder="Tu apellido"
-            />
-          </div>
-        </div>
-
-        <div class="contacto-field flex flex-col gap-2">
-          <label
-            class="text-xs tracking-widest uppercase text-neutral-900/60"
-            for="email"
-          >
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            class="bg-transparent border-b border-neutral-50 py-2 text-sm text-neutral-900 placeholder-neutral-800 focus:outline-none focus:border-neutral-50/70 transition-colors font-light"
-            placeholder="tu@email.com"
-          />
-        </div>
-
-        <div class="contacto-field flex flex-col gap-2">
-          <label
-            class="text-xs tracking-widest uppercase text-neutral-900/60"
-            for="mensaje"
-          >
-            Mensaje
-          </label>
-          <textarea
-            id="mensaje"
-            name="mensaje"
-            rows="5"
-            class="bg-transparent border-b border-neutral-50 py-2 text-sm text-neutral-900 placeholder-neutral-800 focus:outline-none focus:border-neutral-50/70 transition-colors resize-none font-light"
-            placeholder="Contanos sobre tu proyecto o desafío..."></textarea>
-        </div>
-
-        <div id="contacto-submit" class="flex justify-end mt-2">
-          <button
-            type="submit"
-            class="inline-flex cursor-pointer items-center gap-3 border border-neutral-950 text-neutral-50 text-xs tracking-widest uppercase px-8 py-4 hover:bg-neutral-50 hover:border-neutral-950 hover:text-neutral-950 bg-neutral-950 transition-colors rounded-full"
-          >
-            Enviar mensaje
-            <span class="text-base">→</span>
-          </button>
-        </div>
-      </form>
+      <ContactoForm />
     </div>
   </div>
 </section>
@@ -145,8 +72,6 @@ const { title, text, data } = Astro.props;
   const titleEl = document.getElementById("contacto-title")!;
   const textEl = document.getElementById("contacto-text")!;
   const dataEl = document.getElementById("contacto-data");
-  const formFields = document.querySelectorAll(".contacto-field");
-  const submitEl = document.getElementById("contacto-submit")!;
 
   // — Columna izquierda: SplitText en h2 + texto + datos —
   const split = new SplitText(titleEl, { type: "chars" });
@@ -174,19 +99,6 @@ const { title, text, data } = Astro.props;
     start: "top 80%",
     end: "center 75%",
     animation: leftTl,
-    scrub: true,
-  });
-
-  const formTl = gsap.timeline({ paused: true });
-  formTl
-    .from(formFields, { opacity: 0, y: 30, stagger: 0.2, ease: "none" })
-    .from(submitEl, { opacity: 0, filter: "blur(4px)", ease: "none" }, "-=0.1");
-
-  ScrollTrigger.create({
-    trigger: document.getElementById("contacto-form")!,
-    start: "top 85%",
-    end: "bottom 85%",
-    animation: formTl,
     scrub: true,
   });
 </script>
